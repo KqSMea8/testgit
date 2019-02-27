@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+ <head> 
+  <meta charset="utf-8" /> 
+  <title>意见征集</title> 
+  <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no" /> 
+  <meta name="apple-mobile-web-app-capable" content="yes" /> 
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" /> 
+  <link rel="stylesheet" href="{sysPath}/resources/solicitopinion/css/mui.min.css" />
+  <link rel="stylesheet" href="{sysPath}/resources/solicitopinion/js/need/layer.css" /> 
+  <style>
+			html,body {
+				background-color: #f2f2f2;
+				font-size: 16px;
+			}
+			.mui-bar-nav~.mui-content{
+				padding: 0;
+			}
+			.mui-title{
+			font-size:16px;
+			}
+			.title{
+				margin: 20px 15px 7px;
+				color: #6d6d72;
+				font-size: 15px;
+			}
+			.mui-icon-left-nav:before{content:"\e471"; color: white;}
+	
+		
+			td{
+			font-size:12px;
+			text-align:center;
+			}
+		
+			.mui-btn-block{
+			font-size:16px;
+			padding:0;
+			}
+			.mui-button-row{
+			padding:0;
+			margin-top:20px;
+			}
+			.mui-btn, button, input[type=button], input[type=reset], input[type=submit]{
+			font-size:16px;
+			height:40px;
+			border-radius:5px;
+			}
+			
+			.mui-icon-left-nav:before{
+			font-size:25px;
+			}
+			.mui-title {
+ 			font-size: 20px;
+			}
+			.mui-btn-danger, .mui-btn-negative, .mui-btn-red {
+  			 border: 1px solid #{barColor}; 
+			}	
+		 	/*设置因滚动条而出现的div高度为0*/
+		 	.mui-pull-bottom-pocket{
+		 	height:0px;
+		 	}
+		</style> 
+		<script>
+		function view(){
+			var barColor = $('#barColor').val(); 
+			var topicid = $('#topicid').val();
+			var clienttype = $('#clienttype').val();
+			var resourceid = $('#resourceid').val();
+			var clienttype = $('#clienttype').val();
+			$.ajax({
+				type : "GET",
+				url :'{sysPath}/interfaces/viewjson.do',
+			//	data :{"topicid":topicid,"clienttype":clienttype,"resourceid":resourceid,"typeid":typeid,"topicMin":topicMin,"ideapublisher":ideapublisher},
+				data :{"topicid":topicid,"resourceid":resourceid},
+				success : function(msg) {
+			//		$('#topicMin').val(topicMin+10);
+					var result = msg;
+					if(result=='fail'){
+						layer.open({
+			        	    content: '系统错误',
+			        	    style: 'background-color:#545454; color:#fff; border:none;top:-100px;text-align:center;',
+			        	    time: 3
+			        });
+
+						return;
+					}else if(result==''){
+						layer.open({
+			        	    content: '暂无意见提交',
+			        	    style: 'background-color:#545454; color:#fff; border:none;top:-100px;text-align:center;',
+			        	    time: 3
+			        });
+
+						return;
+					}else if(result=='success'){
+						window.location.href="{sysPath}/interfaces/viewpage.do?topicid="+topicid+"&barColor="+barColor+"&clienttype="+clienttype;
+						return;
+					}
+				
+				}
+			});
+		}
+		</script>
+ </head> 
+ <body> 
+ <div class="mui-bar mui-bar-nav" style="width:750px; height:64px;padding-top:10px; background: white;">
+	        <a class="mui-action-back mui-icon mui-pull-left" style="height: 44px; padding-top: 0px;">
+			   <img  src="{sysPath}/resources/solicitopinion/images/ipadback.png" style="max-width: 50%;">
+			</a>
+			<a class="mui-icon mui-pull-right" style="height: 44px;">
+			   <div style="background-color: #E6544C;width: 5px; height: 22px;"></div>
+			</a>
+
+
+			<h1 id="title" class="mui-title " style="color: black; font-size: 20px;right: 25px;text-align: right;">意见征集</h1>
+	  </div> 
+  <div id="pullrefresh" class="mui-content mui-scroll-wrapper" style="padding-top: 64px;height:100%;background-color:#f2f2f2;padding-bottom:20px;">
+  <div id="scroll" class="mui-scroll"> 
+   <div class="mui-content-padded" style="background-color:white;margin:0px;padding-bottom:1px;padding-left:10px;padding-right:10px;"> 
+    <h4 style="margin-top:0px;padding-top:10px;text-align:center">{title}</h4> 
+    <div style="margin-top: 20px" class="content"> 
+    <input type="hidden" value="{topicid}" name="topicid" id="topicid">
+	<input type="hidden" value="{clienttype}" name="clienttype" id="clienttype">
+	<input type="hidden" value="{resourceid}" name="resourceid" id="resourceid">
+	<input type="hidden" value="{barColor}" name="barColor" id="barColor">
+	<input type="hidden" value="{clienttype}" name="clienttype" id="clienttype">
+    {content}
+    </div> 
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" style="border:1px solid #e0e3e1"> 
+     <tbody>
+      <tr> 
+       <td width="30%" height="32" bgcolor="#f2f2f2">征集部门：</td>
+       <td width="70%" height="32">{topicdepartment}</td> 
+      </tr> 
+     </tbody>
+    </table> 
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" style="border:1px solid #e0e3e1;border-bottom:none;border-top:none;"> 
+     <tbody>
+      <tr> 
+       <td width="30%" bgcolor="#f2f2f2">发布日期：</td> 
+       <td width="70%" height="32">{topicbegindate}</td> 
+      </tr> 
+     </tbody>
+    </table> 
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" style="border:1px solid #e0e3e1;margin-bottom:5px;"> 
+     <tbody>
+      <tr> 
+       <td width="30%" bgcolor="#f2f2f2">截至日期：</td> 
+       <td width="70%" height="32" align="center">{topicenddate}</td> 
+      </tr> 
+     </tbody>
+    </table> 
+   </div> 
+  
+   <div class="mui-button-row">
+			<button type="button" class="mui-btn mui-btn-danger"  style="width: 45%;background: #{barColor};margin-right:5px;display:{show1}" onclick="view()">查看意见</button>
+			<button type="button" class="mui-btn mui-btn-danger"  style="width: 45%;background: #{barColor};display:{show1}" onclick="submit()">提交意见</button>
+			<button type="button" class="mui-btn mui-btn-danger"  style="width: 80%;background: #{barColor};display:{show2};" onclick="view()">查看意见</button>
+	</div>
+  </div>
+  </div>  
+  <script src="{sysPath}/resources/solicitopinion/js/mui.min.js"></script>
+  <script src="{sysPath}/resources/solicitopinion/js/jquery-1.8.3.min.js"></script>
+  <script src="{sysPath}/resources/solicitopinion/js/layer.m.js"></script>  
+  <script>
+		mui.init({
+			swipeBack:true ,//启用右滑关闭功能
+			pullRefresh: {
+				container: '#pullrefresh',
+				up: {
+					contentnomore:'',
+					callback: pullupRefresh
+					}
+			}
+		
+		});
+		
+		function pullupRefresh(){
+			mui('#pullrefresh').pullRefresh().endPullupToRefresh((true)); 
+			return;
+		}
+		
+		function submit(){
+			var topicid = $('#topicid').val();
+			var barColor = $('#barColor').val();
+			var resourceid = $('#resourceid').val();
+			var clienttype = $('#clienttype').val();
+			window.location.href="{sysPath}/interfaces/suggestionpage.do?barColor="+barColor+"&topicid="+topicid+"&resourceid="+resourceid+"&clienttype="+clienttype;
+		}
+		
+		
+	
+	</script> 
+ </body>
+</html>

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"  
+    xmlns:context="http://www.springframework.org/schema/context"  
+    xsi:schemaLocation="  
+    http://www.springframework.org/schema/beans  
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd  
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd
+    ">
+	
+	<!-- 报料管理Service -->
+	<bean class="com.hanweb.jmp.apps.service.broke.BrokeService"></bean>
+	<bean class="com.hanweb.jmp.apps.service.broke.BrokeTypeService"></bean>
+	
+	<!-- 导航管理Service -->
+	<bean class="com.hanweb.jmp.cms.service.channels.ChannelService"></bean>
+	<bean class="com.hanweb.jmp.cms.service.channels.ChannelColService"></bean> 
+	
+	<!-- 信息管理Service -->
+	<bean class="com.hanweb.jmp.cms.service.infos.InfoService" id="jmp_InfoService"></bean>
+	<bean class="com.hanweb.jmp.cms.service.infos.InfoOperService"></bean>
+	<bean class="com.hanweb.jmp.cms.service.infos.InfoCountService"  id="jmp_InfoCountService" ></bean> 
+	<bean class="com.hanweb.jmp.cms.service.infos.PicService"></bean>  
+	
+	<!-- 栏目管理Service --> 
+	<bean class="com.hanweb.jmp.cms.service.cols.ColService" id="jmp_ColService"></bean>
+	<bean class="com.hanweb.jmp.cms.service.cols.ColFieldService"></bean>
+	
+	<!-- 评论管理Service-->
+	<bean class="com.hanweb.jmp.cms.service.comment.CommentService"></bean> 
+	
+	<!-- 角标管理Service-->
+	<bean class="com.hanweb.jmp.cms.service.sign.SignService"></bean>
+	<bean class="com.hanweb.jmp.cms.service.sign.SignRelService"></bean>
+	
+	<!-- 意见反馈Service -->
+	<bean class="com.hanweb.jmp.sys.service.feedback.FeedBackService"></bean>
+	
+	<!-- 全局constant -->
+	<bean class="com.hanweb.jmp.constant.TypeConfig"></bean>
+	
+	<!-- 通讯录管理Service -->
+	<bean class="com.hanweb.jmp.apps.service.numbersense.NumSenseColService"></bean>
+	<bean class="com.hanweb.jmp.apps.service.numbersense.NumSensePhoneService"></bean>
+	
+	<!-- 阅读管理Service -->
+	<bean class="com.hanweb.jmp.apps.service.read.ReadService"></bean>
+	
+	<!-- 素材管理-图片管理Service -->
+	<bean class="com.hanweb.jmp.cms.service.matters.picture.PictureService"></bean>
+	<bean class="com.hanweb.jmp.cms.service.matters.picture.PictureColService"></bean>
+	
+	<!-- 素材管理-音视频管理Service -->
+	<bean class="com.hanweb.jmp.cms.service.matters.video.VideoService"></bean>
+	<bean class="com.hanweb.jmp.cms.service.matters.video.VideoColService"></bean>
+	
+	<!-- 素材管理-附件管理Service -->
+	<bean class="com.hanweb.jmp.cms.service.matters.doc.DocService"></bean>
+	<bean class="com.hanweb.jmp.cms.service.matters.doc.DocColService"></bean>
+	
+	<!-- 网站管理Service -->
+	<bean class="com.hanweb.jmp.sys.service.sites.SiteService" id="jmp_SiteService"></bean>  
+	<bean class="com.hanweb.jmp.sys.service.sites.SiteSplashService" id="jmp_SiteSplashService"></bean>
+	
+	<!-- 日志管理Service -->
+	<bean class="com.hanweb.jmp.sys.service.log.LogService"></bean>
+	<bean class="com.hanweb.jmp.sys.service.log.OfflineZipService"></bean>
+	<bean class="com.hanweb.jmp.sys.service.log.InterfaceLogService" id="jmp_InterfaceLogService" ></bean>
+	<bean class="com.hanweb.jmp.sys.service.log.PushInfoLogService"></bean>
+	
+	<!-- 版本更新Service -->
+	<bean class="com.hanweb.jmp.sys.service.version.VersionService"></bean>
+	
+	<!-- 参数设置Service -->
+	<bean class="com.hanweb.jmp.sys.service.parameter.ParameterService"></bean>
+	
+	<!-- 渠道管理Service -->
+	<bean class="com.hanweb.jmp.sys.service.ditch.DitchService"></bean>
+	<bean class="com.hanweb.jmp.sys.service.ditch.SynFieldService"></bean>
+	
+	<!-- 网站字段管理Service -->
+	<bean class="com.hanweb.jmp.sys.service.field.FieldService"></bean>	
+	
+	<!-- 一键打包Service-->
+	<bean class="com.hanweb.jmp.pack.backstage.service.ApplicationService"></bean>	
+	
+	<!-- 轻应用管理Service -->
+	<bean class="com.hanweb.jmp.apps.service.manage.LightAppService" id="jmp_LightAppService"></bean>
+	<bean class="com.hanweb.jmp.apps.service.manage.LightInitService"></bean>
+	
+	<!-- 应用类型 -->
+	<bean class="com.hanweb.jmp.appstype.service.LightAppTypeService" id="jmp_LightAppTypeService"></bean>
+	
+	<!-- 全局Service -->
+	<bean class="com.hanweb.jmp.global.service.ConfigService"></bean>
+	<bean class="com.hanweb.jmp.global.service.PushThreadService"></bean>
+	<bean class="com.hanweb.jmp.global.service.XgPushService" id="jmp_XgPushService"></bean>
+	<bean class="com.hanweb.jmp.global.service.CacheDataService" id="jmp_CacheDataService"></bean>
+	<bean class="com.hanweb.jmp.global.service.GoodRecordService"></bean>
+	<bean class="com.hanweb.jmp.global.service.JsearchService" id="jmp_JsearchService"></bean>
+	<bean class="com.hanweb.jmp.global.service.MessageService"></bean>
+	<bean class="com.hanweb.jmp.global.service.ModuleService"></bean>
+	<bean class="com.hanweb.jmp.global.service.OutSideUserSubscribeColRelService"></bean>
+	<bean class="com.hanweb.jmp.global.service.TaskService" id="jmp_TaskService"></bean>
+	<bean class="com.hanweb.jmp.global.service.ValidCodeService"></bean>
+	
+	<!-- 角色管理Service -->
+	<bean class="com.hanweb.jmp.sys.service.role.RoleColService"></bean>
+	<bean class="com.hanweb.jmp.sys.service.role.RolePushTypeService"></bean>
+	
+	<!-- 调查管理Service -->
+	<bean class="com.hanweb.jmp.apps.service.survey.AnswerService"></bean>
+	<bean class="com.hanweb.jmp.apps.service.survey.QuestionService"></bean>
+	<bean class="com.hanweb.jmp.apps.service.survey.SurveyService"></bean>
+	<bean class="com.hanweb.jmp.apps.service.survey.SurveyAnswerService"></bean>
+	<bean class="com.hanweb.jmp.apps.service.survey.UserVoteCountService"></bean>
+	<bean class="com.hanweb.jmp.apps.service.survey.SurveyResultService"></bean>
+	
+	<!-- 全局接口Service -->
+	<bean class="com.hanweb.interfaces.service.InfoInterfaceService"></bean>
+	<bean class="com.hanweb.interfaces.service.CommonService"></bean>
+	
+	<!-- 全局util -->
+	<bean id="HadoopFileUtil" name="HadoopFileUtil" class="com.hanweb.jmp.util.HadoopUtil"></bean>
+	<bean id="LocalFileUtil" name="LocalFileUtil" class="com.hanweb.common.util.file.LocalFileUtil"></bean>
+	<bean id="FileUtil" name="FileUtil" class="com.hanweb.common.util.file.LocalFileUtil"></bean>
+	
+	<bean class="com.hanweb.jmp.pack.service.AppService"></bean>
+	<bean class="com.hanweb.jmp.pack.service.ClientService"></bean>
+	<bean class="com.hanweb.jmp.pack.service.SiteService"></bean>
+	<bean class="com.hanweb.jmp.pack.service.AppUserService"></bean>
+	<bean class="com.hanweb.jmp.pack.service.UserService"></bean>
+	<bean class="com.hanweb.jmp.pack.service.ChannelService"></bean>
+	<bean class="com.hanweb.jmp.pack.service.ColService"></bean>
+	<bean class="com.hanweb.jmp.pack.service.InfoOperService"></bean>
+	<bean class="com.hanweb.jmp.pack.service.InfoService"></bean>
+	<bean class="com.hanweb.jmp.pack.service.NumSenseColService"></bean>
+	<bean class="com.hanweb.jmp.pack.service.ParameterService"></bean>
+	<bean class="com.hanweb.jmp.pack.service.PicService"></bean>
+	<bean class="com.hanweb.jmp.pack.service.ReadService"></bean>
+	<bean class="com.hanweb.jmp.pack.service.SignRelService"></bean>
+	<bean class="com.hanweb.jmp.pack.service.SignService"></bean>
+	
+	<!-- 功能管理Service -->
+	<bean class="com.hanweb.jmp.cms.service.function.LayoutService"></bean>
+	
+	<!-- 群组管理 -->
+	<bean class="com.hanweb.jmp.newspush.peoplelist.service.PeoplelistService"></bean>
+	<bean class="com.hanweb.jmp.newspush.peoplelist.service.PeoplelistRelationService"></bean>
+	
+	<bean class="com.hanweb.jmp.newspush.userdevice.service.UserDeviceService"></bean>
+	<bean class="com.hanweb.jmp.newspush.userdevice.service.InterfaceService"></bean>
+	<bean class="com.hanweb.jmp.newspush.userdevice.service.JsonService"></bean>
+	<bean class="com.hanweb.jmp.newspush.news.service.NewsDetailService"></bean>
+</beans>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>公交查询</title>
+		<script src="./source/js/mui.min.js"></script>
+		<link href="./source/css/mui.min.css" rel="stylesheet" />
+		<link href="./source/css/busBusChange.css" rel="stylesheet" />
+		<script type="text/javascript" charset="UTF-8">
+			mui.init();
+		</script>
+		<!--引用百度地图的js-->
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=xOWZlWcTZPK84VcK3Ixzqq9wQ6arTUry"></script>
+	</head>
+
+	<body>
+		<div style="display: none;" id="header">
+			<header class="mui-bar mui-bar-nav" style="background-color: #007AFF;height:44px;font-family: '微软雅黑';">
+				<a class="mui-action-back mui-icon mui-pull-left" style="color: #FFFFFF;background-image: url(./source/images/topback.png);background-size: 20px 20px;background-repeat: no-repeat;margin-top: 10px;margin-left: 10px"></a>
+				<h1 class="mui-title" style="color: #FFFFFF;">公交方案</h1>
+			</header>
+		</div>
+		<script>
+			var href = location.href;
+			// 依据href获得传来的参数截取传来的起始点名称
+			var startName = href.split("startName=")[1].split("&")[0];
+			var endName = href.split("endName=")[1];
+			startName = decodeURI(startName);
+			endName = decodeURI(endName);
+		</script>
+
+		<div id="l-map"></div>
+		<!--<div id="r-result"></div>-->
+		<div class="mui-content">
+			<div id="paddingtop" class="mui-scroll-wrapper" style="min-height: 100%;background-color: #FFFFFF;padding-top: 44px;">
+				<div class="mui-scroll">
+					<ul class="mui-table-view" id="parent" style="display: none;background-color: #FFFFFF;">
+						<!--模版 列表循环部分 start-->
+						<li class="mui-media mui-table-view-cell" v-for="item in items" onclick="GetBusChangeDetail('{{item.changeLine}}' , '{{item.changeDetail}}' , '{{{item.changeDescription}}}' , {{$index}})" style="height:90px;width: 100%;border-bottom-width: 1px solid #f2f2f2;">
+							<a href="javascript:;">
+								<div class="mui-media-body" style="font-size: 16px;color: #333333;margin-top:0px;">
+									<img class="mui-pull-left leftImage" src="./source/images/bus_bus.png">
+									<div id="changeLine" style="padding-top: 3px;font-size: 16px;">
+										{{item.changeLine}}
+									</div>
+									<div id="changeDescription" style="display: none;">{{item.changeDescription}}</div>
+								</div>
+								<div style="float: left;padding-top: 21px;"><span style="color: black;font-size: 14px;padding-left: 5px;">畅通</span><span class='mui-ellipsis' id="changeDetail" style="font-size: 14px;color: #999999;padding-left: 10px;">{{item.changeDetail}}</span></div>
+								<img src="./source/images/arrow.png" style="float:right;width: 20px;height:20px;">
+							</a>
+						</li>
+						<!--模版 列表循环部分 end-->
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<script>
+			var main = null;
+			mui.init({
+				swipeBack: false,
+				statusBarBackground: '#f7f7f7',
+				gestureConfig: {
+					doubletap: true
+				}
+			});
+			mui.plusReady(function() {
+				//仅支持竖屏显示
+				plus.screen.lockOrientation("portrait-primary");
+				main = plus.webview.currentWebview();
+			});
+			//敲击顶部导航，内容区回到顶部
+			document.querySelector('header').addEventListener('doubletap', function() {
+				main.children()[0].evalJS('mui.scrollTo(0, 100)');
+			});
+			(function($) {
+				$('.mui-scroll-wrapper').scroll({
+					indicators: true //是否显示滚动条
+				});
+			})(mui);
+		</script>
+		<script src="./source/js/util.js"></script>
+		<script src="./source/js/vue.min.js "></script>
+		<script src="./entity/busBusChangeEntity.js "></script>
+		<script src="./service/busBusChange.service.js "></script>
+		<script src="./controller/busBusChange.controller.js "></script>
+	</body>
+
+</html>

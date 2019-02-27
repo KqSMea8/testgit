@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>领导信箱首页</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="{sysUrl}/resources/mailbox/css/mui.min.css">
+		<link rel="stylesheet" href="{sysUrl}/resources/mailbox/js/need/layer.css">
+		<style>
+			html,body {
+				background-color: #f2f2f2;
+			}
+			.mui-bar-nav~.mui-content{
+				padding: 0;
+			}
+			
+			.title{
+				margin: 20px 15px 7px;
+				color: #6d6d72;
+				font-size: 15px;
+			}
+			.mui-icon-left-nav:before{content:"\e471"; color: white;}
+			.mui-table-view-cell:after {left: 0px;}
+			.mui-icon-contact:before {color: white;}
+		</style>
+	</head>
+	<body>
+	  <div class="mui-bar mui-bar-nav" style="height:44px; box-shadow:none;  background:#{color};">
+	        <input type="hidden" id="color" name="color" value="{color}"></input>
+	        <input type="hidden" id="sysid" name="sysid" value="{sysid}"></input>
+	        <input type="hidden" id="clienttype" name="clienttype" value="{clienttype}"></input>
+	        <input type="hidden" id="jactUrl" name="jactUrl" value="{jactUrl}"></input>
+	        <input type="hidden" id="appname" name="appname" value="{appname}"></input>
+	        <input type="hidden" id="filename" name="filename" value="login"></input>
+			<a class="mui-icon mui-pull-left" href="backtoapp" style="padding: 0 0;">
+			  <img src="{sysUrl}/resources/mailbox/images/goback.png" style="max-height: 44px;">
+			</a>
+			<a id="icon-icon-contact mui-pull-right"><span class="mui-icon mui-icon-contact mui-pull-right" onclick="login()"></span></a>
+			<h1 id="title" class="mui-title" style="color: white;font-size: 20px;">领导信箱</h1>
+	  </div>
+	  <div class="mui-content" style="padding-top: 44px;height:auto; font-size: 18px;color: #333333; ">
+	       <img  src="{sysUrl}/resources/mailbox/images/mailbox.png" style="min-width: 100%;max-width: 100%; vertical-align: bottom;margin-bottom: 1px;" >
+	        <ul class="mui-table-view" style="line-height: 40px;">
+				<li class="mui-table-view-cell">  
+					<a class="mui-navigate-right" onclick="checklogin()" style="">
+					    <img class="mui-media-object mui-pull-left" src="{sysUrl}/resources/mailbox/images/1.png" style="width: 30px; height: 30px;margin-right: 28%;margin-left: 20px;margin-top: 5px;">
+					    <input type="hidden" id="uuid" name=uuid value="{uuid}"></input>
+					    <input type="hidden" id="resourceid" name=resourceid value="{resourceid}"></input>
+						<div class="mui-media-body">领导信箱</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell">  
+					<a class="mui-navigate-right" onclick="searchBJ()" style="">
+					    <img class="mui-media-object mui-pull-left" src="{sysUrl}/resources/mailbox/images/2.png" style="width: 30px; height: 30px;margin-right: 28%;margin-left: 20px;margin-top: 5px;">
+						<div class="mui-media-body">查看办件</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell">  
+					<a class="mui-navigate-right" onclick="checklogin1()" style="">
+					    <img class="mui-media-object mui-pull-left" src="{sysUrl}/resources/mailbox/images/3.png" style="width: 30px; height: 30px;margin-right: 28%;margin-left: 20px;margin-top: 5px;">
+						<div class="mui-media-body">我的办件</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell">  
+					<a class="mui-navigate-right" onclick="help()" style="">
+					    <img class="mui-media-object mui-pull-left" src="{sysUrl}/resources/mailbox/images/4.png" style="width: 30px; height: 30px;margin-right: 28%;margin-left: 20px;margin-top: 5px;">
+						<div class="mui-media-body">使用帮助</div>
+					</a>
+				</li>
+				
+	  </ul>
+	  </div>
+	 
+	  
+	</body>
+	<script src="{sysUrl}/resources/mailbox/js/mui.min.js"></script>
+	<script src="{sysUrl}/resources/mailbox/js/jquery-1.8.3.min.js"></script>
+	<script src="{sysUrl}/resources/mailbox/js/layer.m.js"></script>
+	<script>
+		mui.init({
+			swipeBack:true //启用右滑关闭功能
+		});
+
+		var color = $("#color").val();
+		var sysid = $("#sysid").val();
+		var uuid = $("#uuid").val();
+		var filename = $("#filename").val();
+		var clienttype = $("#clienttype").val();
+        var jactUrl = $("#jactUrl").val();
+        var appname = $("#appname").val();
+		function login(){
+			window.location.href="{sysUrl}/interfaces/mailbox/login.do?filename=" + filename + "&color="+color+ "&sysid="+sysid+ "&uuid="+uuid + "&clienttype=" + clienttype + "&jactUrl=" + jactUrl + "&appname=" + appname;
+		}
+
+        function checklogin(){
+	  		window.location.href="{sysUrl}/interfaces/mailbox/group.do?filename=" + filename + "&color="+color+ "&sysid="+sysid+ "&uuid="+uuid+ "&clienttype=" + clienttype+ "&appname=" + appname;	  	
+        }
+
+        function checklogin1(){
+	  	   window.location.href="{sysUrl}/interfaces/mailbox/list.do?sysid=" + sysid + "&color=" + color + "&clienttype=" + clienttype + "&uuid="+uuid;			  		
+        }
+
+        function searchBJ(){        	
+			window.location.href="{sysUrl}/interfaces/mailbox/searchbanjian.do?color=" +color + "&clienttype=" + clienttype;
+        }
+		
+		function help(){
+			window.location.href="{sysUrl}/interfaces/mailbox/help.do?color=" +color + "&clienttype=" + clienttype;
+		}
+	</script>
+</html>

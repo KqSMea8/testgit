@@ -1,0 +1,9 @@
+<li class="mui-table-view-cell">
+	<span class="biaoti">答复时间：</span>&nbsp;<span class="content">{date}</span>
+</li>
+<li class="mui-table-view-cell">
+	<span class="biaoti">答   &nbsp;复   &nbsp;人：</span>&nbsp;<span class="content">{anwser}</span>
+</li>
+<li class="mui-table-view-cell">
+	<span class="biaoti">答复内容：</span>&nbsp;<p class="content">　　{content}</p>
+</li>

@@ -1,0 +1,11 @@
+<input type="hidden" name="{index}_type" value="{value1}" id="{index}_type"/>
+<input type="hidden" name="{index}_id" value="{value2}" id="{index}_id"/>
+<input type="hidden" name="{index}_quesempty" value="{value3}" id="{index}_quesempty"/>
+<input type="hidden" name="{index}_num" value="{answernum}" id="{index}_num"/>
+<div style="background-color:white;margin-top:{top}">
+	    <div class="mui-input-row">
+			<span  style="line-height: 30px;width:90%">{title}</span>
+			<div class="questype">{questype}</div>
+		</div>
+		{body}
+</div>

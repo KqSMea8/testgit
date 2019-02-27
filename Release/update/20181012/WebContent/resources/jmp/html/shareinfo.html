@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="renderer" content="webkit"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
+<meta http-equiv="X-UA-Compatible" content="IE=IE8"/> 
+<title>{title}</title>  
+<link rel="stylesheet" type="text/css" href="{jmpurl}/resources/jmp/interface/css/body.css" />  
+<script language="javascript" src="{jmpurl}/ui/lib/jquery/jquery-1.8.3.min.js"></script>   
+<style>
+	img {
+ 		max-width: 100%;
+	}
+</style>
+</head>
+
+<body>
+<script type="text/javascript">
+
+function aa(){ 
+    
+	var ua = window.navigator.userAgent;  
+	if (ua && ua.indexOf('MicroMessenger')>=0){   
+		document.getElementById('ssss').style.display = "block"; 
+	}else{ 
+		document.getElementById('eeee').style.display = "block"; 
+		window.location.href = "{downurl}"; 
+		$("#eeee").show(); 
+		setTimeout(function(){ 
+			$("#eeee").hide(); 
+		},300); 
+	} 
+}
+
+
+
+function hide(){ 
+	$("#ssss").hide(); 
+}
+
+</script>
+
+
+
+<div id="container">  
+  <div id="Pagebody">  
+    <!-- 文章区 -->
+    <div id="article"> 
+      <div id="content">  
+        <div id="title">{title}</div>
+        <div id="liutp"><div id="from">来源：{colname}</div>
+        <div id="pubdate">时间：{synshowtime}</div></div>
+        <script>var liutpWidth=$("#from").width()+$("#pubdate").width()+40;if(liutpWidth<$("#content").width()){$("#liutp").width(liutpWidth);}else{$("#liutp").width($("#content").width());}</script>
+        <div id="text">{content}</div>
+        <div id="liudo"><div style='display: {showsource};' id="sourceinfo"><a href='#' onclick="window.location.href='{url}'" style='display: {showsource};color: #335075;'>查看原文</a></div>
+        <!-- <div id="readcount">阅读：{visitcount}</div> -->
+        <!-- <div id="downjmp" style='display: {showdownurl};'><a href="javascript:aa();" style='display: {showdownurl};color: #335075;' >下载客户端</a></div></div> -->
+        <div style="display:none;width:100%;height:110%; position:absolute; z-index:999; top:0; left:0; color:#fff; background:url({jmpurl}/resources/jmp/interface/html/s1.png)" id="ssss" onClick="hide();"><img src="{jmpurl}/resources/jmp/interface/html/s2.png" width="100%" border="0" /></div>
+        <div style="display:none;width:100%;height:100%; position:absolute; z-index:999; top:0; left:0; color:#fff; background:url({jmpurl}/resources/jmp/interface/html/s1.png)" id="eeee"></div>
+      </div> 
+    </div>
+  </div> 
+</div>
+ <!-- js 文章自适应 -->
+<script type="text/javascript" src="{jmpurl}/resources/jmp/interface/script/infobody.js"></script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/task
+	http://www.springframework.org/schema/task/spring-task-3.0.xsd"
+	>
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" >
+        <!-- 找不到 不报错 -->
+        <property name="ignoreResourceNotFound" value="true"/>
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+        <!-- 读取n个配置文件 -->
+        <property name="locations">
+        	<list>
+            	<value>/WEB-INF/config/jmportal.properties</value>
+            </list>
+        </property>
+        <property name="fileEncoding" value="utf-8"/>
+    </bean>
+	<bean id="jmp_Configs" class="com.hanweb.jmp.constant.Configs">
+		<property name="jmpUrl" value="${jmpUrl}"/>
+		<property name="jgetUrl" value="${jgetUrl}"/>
+		<property name="jgetLogId" value="${jgetLogId}"/>
+		<property name="jgetPassword" value="${jgetPassword}"/>
+		<property name="jsearchUrl" value="${jsearchUrl}"/>
+		<property name="canAppFactory" value="${canAppFactory}"/>
+		<property name="synPeroid" value="${synPeroid}"/>
+		<property name="infoSaveType" value="${infoSaveType}"/>
+		<property name="infoSaveDays" value="${infoSaveDays}"/>
+		<property name="infoSaveCounts" value="${infoSaveCounts}"/>
+		<property name="synLastTime" value="${synLastTime}"/>
+		<property name="areaFlag" value="${areaFlag}"/>
+		<property name="weathertime" value="${weathertime}"/>
+		<property name="picFileType" value="${picFileType}"/>
+		<property name="picFileSize" value="${picFileSize}"/>
+		<property name="audioFileType" value="${audioFileType}"/> 
+		<property name="audioFileSize" value="${audioFileSize}"/>
+		<property name="videoFileType" value="${videoFileType}"/>
+		<property name="videoFileSize" value="${videoFileSize}"/>
+		<property name="fileType" value="${fileType}"/> 
+		<property name="weatherurl" value="${weatherurl}"/>
+		<property name="fileSize" value="${fileSize}"/> 
+		<property name="timeFormat" value="${timeFormat}"/>  
+		<property name="iosEnvironment" value="${iosEnvironment}"/>   
+		<property name="interfaceCache" value="${interfaceCache}"/>   
+		<property name="messageUrl" value="${messageUrl}"/>  
+		<property name="messageContent" value="${messageContent}"/>   
+		<property name="allowIp" value="${allowIp}"/>  
+		<property name="intervalTime" value="${intervalTime}"/> 
+		<property name="hudongtype" value="${hudongtype}"/>
+		<property name="apkUrl" value="${apkUrl}"/>
+		<property name="iosUrl" value="${iosUrl}"/>
+		<property name="isAutoCreateApp" value="${isAutoCreateApp}"/>
+		<property name="weixinUrl" value="${weixinUrl}"/>
+		<property name="serviceCode" value="${serviceCode}"/>
+		<property name="key" value="${key}"/>
+		<property name="wxSupport" value="${wxSupport}"/>
+		<property name="smtp" value="${smtp}"/>
+		<property name="eport" value="${eport}"/>
+		<property name="emailAccount" value="${emailAccount}"/>
+		<property name="emailPwd" value="${emailPwd}"/>
+		<property name="emailName" value="${emailName}"/>
+		<property name="emailContent" value="${emailContent}"/>
+		<property name="createAppNum" value="${createAppNum}"/>
+		<property name="createAppType" value="${createAppType}"/>
+		
+		
+		<property name="jcmsUrl" value="${jcmsUrl}"/>
+		<property name="jcmsLogId" value="${jcmsLogId}"/>
+		<property name="jcmsPassword" value="${jcmsPassword}"/>
+		<property name="jmpcolId" value="${jmpcolId}"/>
+		<property name="jcmscolId" value="${jcmscolId}"/>
+		<property name="htpUrl" value="${htpUrl}"/>
+	</bean>
+	
+	<bean id="jmp_clientversions" class="com.hanweb.jmp.constant.ClientVersion">
+		<property name="uc" value="${uc}"/>
+		<property name="iphone" value="${iphone}"/>
+		<property name="android" value="${android}"/>
+		<property name="ipad" value="${ipad}"/>
+	</bean>
+</beans>

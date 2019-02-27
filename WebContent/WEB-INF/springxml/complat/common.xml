@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/task
+	http://www.springframework.org/schema/task/spring-task-3.0.xsd"
+	>
+	
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" >
+        <!-- 找不到 不报错 -->
+        <property name="ignoreResourceNotFound" value="true"/>
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+        <!-- 读取n个配置文件 -->
+        <property name="locations">
+        	<list>
+            	<value>/WEB-INF/config/complat.properties</value>
+            </list>
+        </property>
+        <property name="fileEncoding" value="utf-8"/>
+    </bean>
+    
+	<bean id="complat_Settings" class="com.hanweb.complat.constant.Settings">
+		<property name="banTimes" value="${banTimes}"/>
+		<property name="canFeedback" value="${canFeedback}"/>
+		<property name="checkLevel" value="${checkLevel}"/>
+		<property name="interceptMode" value="${interceptMode}"/>
+		<property name="loginError" value="${loginError}"/>
+		<property name="sessionTime" value="${sessionTime}"/>
+		<property name="fileTmp" value="${fileTmp}"/>
+		<property name="imageDir" value="${imageDir}"/>
+		<property name="attachmentDir" value="${attachmentDir}"/>
+		<property name="enableVerifyCode" value="${enableVerifyCode}"/>
+	</bean>
+</beans>

@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 2.6//EN"
+        "http://tuckey.org/res/dtds/urlrewrite2.6.dtd">
+<!--
+    Configuration file for UrlRewriteFilter
+    http://tuckey.org/urlrewrite/
+-->
+<urlrewrite>
+    <rule>
+		<!-- <from>/app/([0-9]+)_([c]*[0-9]+)_([1|2|3|4|5]{1})</from> -->
+		<!-- <to>/client/opr_downloadClient.jsp?infoId=$1&amp;resId=$2&amp;server=$3</to>  -->
+		<from>/client/([c]*[0-9]+)_([c]*[0-9]+).*</from>
+		<to>/interfaces/shareinfo.do?siteid=$1&amp;titleid=$2</to>
+	</rule>  
+</urlrewrite>	

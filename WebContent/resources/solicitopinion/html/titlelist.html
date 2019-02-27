@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>意见征集</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="{sysPath}/resources/solicitopinion/css/mui.min.css">
+		<link rel="stylesheet" href="{sysPath}/resources/solicitopinion/js/need/layer.css">
+		<style>
+			html,body {
+				background-color: #f2f2f2;
+				font-size:16px;
+			}
+			.mui-bar-nav~.mui-content{
+				padding: 0;
+			}
+			
+			.title{
+				margin: 20px 15px 7px;
+				color: #6d6d72;
+				font-size: 15px;
+			}
+			.mui-title{
+				font-size: 20px;
+			}
+			/*调查是否结束的样式*/
+			.tip{
+			font-size: 12px;
+			width: 30px;
+			height:30px;
+			margin-right: 20px;
+			margin-top: 10px;
+			}
+			.mui-icon-left-nav:before{content:"\e471"; color: white; font-size: 25px;}
+			/*日期*/
+			p{
+			margin-top:30px;
+			height:20px;
+			color:#808080;
+			font-size: 12px;
+			}
+			.mui-table-view-cell:after{width:100%;left:0px;right:0px;}
+			.mui-table-view-chevron .mui-table-view-cell {
+			  padding-right: 15px;
+			}
+			mui-table-view-chevron .mui-table-view-cell>a:not(.mui-btn) {
+			  margin-right: 0px;
+			}
+			
+			a:link { text-decoration:none;color: #808080;}
+	    　　 a:active { text-decoration:none}
+	    　　 a:hover { text-decoration:none}
+	    　　 a:visited { text-decoration:none;background-color:#eee;}
+	    	
+		</style>
+	</head>
+	<body>
+	  <div class="mui-bar mui-bar-nav" style="background: #{barColor};box-shadow:none;">
+			<a class="{back} mui-icon mui-pull-left" href="{href}" style="height: 44px; padding-top: 0px;margin-left:-25px;">
+				<img  src="{sysPath}/resources/solicitopinion/images/back.png" style="width:auto;max-height:44px;">
+			</a>
+			<h1 id="title" class="mui-title" style="color: white;">意见征集</h1>
+	  </div>
+	  <!--下拉刷新容器-->
+		<div id="pullrefresh" class="mui-content mui-scroll-wrapper" style="padding-top: 44px;">
+			<div id="mui-scroll" class="mui-scroll">
+			<input type="hidden" id="sysid" name="sysid" value="{sysid}"/>
+			<input type="hidden" id="resourceid" name="resourceid" value="{resourceid}"/>
+			<input type="hidden" id="topicMin" name="topicMin" value="{topicMin}"/>
+			<input type="hidden" id="typeid" name="typeid" value="{typeid}"/>
+			<input type="hidden" id="clienttype" name="clienttype" value="{clienttype}"/>
+			<input type="hidden" id="topictotle" name="topictotle" value="{topictotle}"/>
+			<input type="hidden" id="barColor" name="barColor" value="{barColor}"/>
+			
+				<!--数据列表-->
+				 <img  src="{sysPath}/resources/solicitopinion/images/idea.png" style="min-width: 100%;max-width: 100%; vertical-align: bottom;margin-bottom: 1px;display:{bgshow}" >
+				<ul class="mui-table-view mui-table-view-chevron">
+				 <!--body-->   
+				 	
+				</ul>
+			</div>
+		</div>
+	 
+	  
+	</body>
+	<script src="{sysPath}/resources/solicitopinion/js/jquery-1.8.3.min.js"></script>
+	<script src="{sysPath}/resources/solicitopinion/js/mui.min.js"></script>
+	<script src="{sysPath}/resources/solicitopinion/js/layer.m.js"></script>	
+	<script>
+		mui.init({
+			pullRefresh: {
+				container: '#pullrefresh',
+				up: {
+					contentrefresh: '正在加载...',
+					contentnomore:'',
+					callback: pullupRefresh
+				}
+			}
+		});
+		
+		
+		/**
+		 * 上拉加载具体业务实现
+		 */
+		function pullupRefresh() { 
+			var resourceid = $('#resourceid').val();
+			var sysid = parseInt($('#sysid').val());
+			var typeid =parseInt($('#typeid').val());
+			var topicMin = parseInt($('#topicMin').val());
+			var clienttype = parseInt($('#clienttype').val());
+			var topictotle = $('#topictotle').val();
+			
+		
+			setTimeout(function() {
+				
+				if(parseInt(topicMin+10)>parseInt(topictotle)){
+					layer.open({
+		        	    content: '没有更多内容了',
+		        	    style: 'background-color:#545454; color:#fff; border:none;top:-100px;text-align:center;',
+		       	        time: 2
+		        });
+					mui('#pullrefresh').pullRefresh().endPullupToRefresh((true));
+					mui('#pullrefresh').pullRefresh().refresh(true);
+					document.getElementById('mui-scroll').scrollTop=500;
+					return;
+					}
+				
+				$.ajax({
+					type : "GET",
+					url :'{sysPath}/interfaces/loadmoretopic.do?resourceid='+resourceid+'&sysid='+sysid+'&topicMin='+(topicMin+10)+'&typeid='+typeid,
+					success : function(msg) {
+						var result = msg;
+						if(result=='fail'){
+							layer.open({
+				        	    content: '请求超时',
+				        	    style: 'background-color:#545454; color:#fff; border:none;top:-100px;text-align:center;',
+				        	    time: 2
+				        });
+							mui('#pullrefresh').pullRefresh().endPullupToRefresh((false)); //参数为true代表没有更多数据了。
+							return;
+						}else if(result==''){
+							layer.open({
+				        	    content: '没有更多内容了',
+				        	    style: 'background-color:#545454; color:#fff; border:none;top:-100px;text-align:center;',
+				       	        time: 2
+				        });
+							mui('#pullrefresh').pullRefresh().endPullupToRefresh((false)); //参数为true代表没有更多数据了。
+							return;
+						}
+						$('#topicMin').val(topicMin+10);
+						var arrays=result.split("$");
+					//	mui('#pullrefresh').pullRefresh().endPullupToRefresh((result == '')); //参数为true代表没有更多数据了。
+						var table = document.body.querySelector('.mui-table-view');
+						var cells = document.body.querySelectorAll('.mui-table-view-cell');
+						var j=0;
+						for (var i = cells.length, len = i + arrays.length; i < len; i++) {
+							var li = document.createElement('li');
+							li.className = 'mui-table-view-cell';
+							li.innerHTML = arrays[j];
+							table.appendChild(li);
+							j=j+1;
+						}
+						mui('#pullrefresh').pullRefresh().endPullupToRefresh((result == ''));
+					}
+					
+				});
+				
+				
+			}, 1000);
+			
+		}
+	//		if (mui.os.plus) {
+	//			mui.plusReady(function() {
+	//				setTimeout(function() {
+	//					mui('#pullrefresh').pullRefresh().pullupLoading();
+	//				}, 1000);
+	//			});
+	//		} 
+	
+	
+		function content(topicid,resourceid,typeid,topicMin){
+	
+			var barColor = $('#barColor').val();
+	
+			window.location.href= "{sysPath}/interfaces/showcontent.do?topicMin="+topicMin+"&topicid="+topicid+"&typeid="+typeid+"&resourceid="+resourceid+"&barColor="+barColor;
+			return;
+		}
+	</script>
+</html>

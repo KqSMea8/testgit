@@ -1,0 +1,4 @@
+<tr>
+	<td width="50%">{mailnumber}</td>
+	<td width="50%">{querycode}</td>
+</tr>

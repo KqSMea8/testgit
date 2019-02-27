@@ -1,0 +1,10 @@
+<td style="width:33.33%;padding:0px;">
+	<div style="border:#f2f2f2 solid 1.5px;height:100%;padding:0px;padding-top:0px;margin:5px;">
+	   <div style="position:relative"><a href="{link}"><img  src="{picSrc}" style="vertical-align:middle;width:100%;"></a>
+	     <div id="{value}_count" style="display: -webkit-box; -webkit-box-align: center;-webkit-box-pack: center;width:45%;font-size:12px;height:15%;min-height:17px;background-color:red;background:rgba(0,0,0,0.8);filter:alpha(Opacity=60);-moz-opacity:0.6;opacity: 0.6;color:white;position:absolute;top:0;right:0">{count}票</div></div>
+	     <div class=" mui-{quesType} mui-right" style="height:auto;max-height:40%;position:relative;text-align:left">
+				<label style="font-size:14px;min-height:80%;width:90%;line-height:30px;padding-left:4%;padding-top:0px;padding-bottom:0px;">{title}</label>
+			    <input id="{index}_{answerindex}" name="{index}_{quesType}" value="{value}" type="{quesType}" style=" position: absolute;top: 50%; margin-top: -11px;margin-left:" {disabled}>
+		 </div>
+	</div>
+</td>

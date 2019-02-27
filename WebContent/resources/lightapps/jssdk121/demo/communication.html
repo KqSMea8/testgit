@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+            <meta charset="UTF-8">
+                <title>通讯接口</title>
+                <style>
+                    html, body {
+                        width: 100%;
+                        overflow: hidden;
+                        padding: 0;
+                        margin: 0;
+                    }
+                
+                .body-state {
+                    color: #FFFFFF;
+                    background-color: #ED6A60;
+                    height: 20px;
+                }
+                
+                .body-title {
+                    font-size: 16px;
+                    color: #FFFFFF;
+                    background-color: #ED6A60;
+                    height: 44px;
+                    line-height: 44px;
+                }
+                
+                .body-wrap {
+                    overflow: hidden;
+                    padding-left: 15%;
+                }
+                
+                .sbtn {
+                    width: 80%;
+                    color: #FFFFFF;
+                    background-color: #ED6A60;
+                    text-align: center;
+                    height: 35px;
+                    line-height: 37px;
+                    overflow: hidden;
+                    border-radius: 5px;
+                    font-size: 16px;
+                    border: 0px;
+                }
+                
+                .backBtn {
+                    padding-right: 0px;
+                    width: 60px;
+                    height: 44px;
+                    background-image: url("http://www.pertool.com/www/img/backButton.png");
+                    background-size: 100%;
+                    text-align: center;
+                    border: 0px;
+                }
+                
+                .title {
+                    height: 40px;
+                    width: 30%;
+                    line-height: 40px;
+                    vertical-align: top;
+                    margin-left: 24%;
+                }
+                
+                .body-wrap .btnInfo {
+                    margin: 30px 0 7px 0;
+                    font-size: 14px;
+                    color: gray;
+                }
+                </style>
+    </head>
+    
+    <body>
+     
+        <div class="body-wrap">
+            <div>
+                <p class="btnInfo">发短信接口</p>
+                <button class="sbtn" onclick=onSendMessage('13306711756')>onSendMessage</button>
+            </div>
+            <div>
+                <p class="btnInfo">打电话接口</p>
+                <button class="sbtn" onclick=onCallPhone('13306711756')>onCallPhone</button>
+            </div>
+            <div>
+                <p class="btnInfo">发邮件接口</p>
+                <button class="sbtn" onclick=onSendEmail('553879676@qq.com')>onSendEmail</button>
+            </div>
+        </div>
+        <script type="text/javascript" src="http://app.zjzwfw.gov.cn/client/jssdk/js/index.js"></script>
+        <script data-main="http://app.zjzwfw.gov.cn/client/jssdk/jmportal_SDK.js" src="http://app.zjzwfw.gov.cn/client/jssdk/require.js"></script>
+<!--        <script type="text/javascript" src="../js/index.js"></script>-->
+<!--        <script data-main="../jmportal_SDK.js" src="../require.js"></script>-->
+
+    </body>
+</html>

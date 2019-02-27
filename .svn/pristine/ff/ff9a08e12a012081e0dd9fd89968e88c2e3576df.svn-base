@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>网上调查</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="{sysPath}/resources/onlinesurvey/css/mui.min.css">
+		<link rel="stylesheet" href="{sysPath}/resources/onlinesurvey/js/need/layer.css">
+		<style>
+			html,body {
+				background-color: #f2f2f2;
+				font-size:16px;
+			}
+			.mui-bar-nav~.mui-content{
+				padding: 0;
+			}
+			
+			.title{
+				margin: 20px 15px 7px;
+				color: #6d6d72;
+				font-size: 15px;
+			}
+			.mui-title{
+				font-size: 16px;
+			}
+			/*调查是否结束的样式*/
+			.tip{
+			font-size: 12px;
+			width: 30px;
+			height:30px;
+			margin-right: 20px;
+			margin-top: 10px;
+			}
+			.mui-icon-left-nav:before{content:"\e471"; color: white; font-size: 20px;}
+			/*日期*/
+			p{
+			margin-top:30px;
+			height:20px;
+			color:#808080;
+			font-size: 12px;
+			}
+			.mui-table-view-cell:after{width:100%;left:0px;right:0px;}
+			.mui-table-view-chevron .mui-table-view-cell {
+			  padding-right: 15px;
+			}
+			mui-table-view-chevron .mui-table-view-cell>a:not(.mui-btn) {
+			  margin-right: 0px;
+			}
+		
+			.mui-icon-left-nav:before{
+			font-size:25px;
+			}
+			.mui-title {
+ 			font-size: 20px;
+			}
+			a:link { text-decoration:none;color: #808080;}
+	    　　 a:active { text-decoration:none}
+	    　　 a:hover { text-decoration:none}
+	    　　 a:visited { text-decoration:none}	
+				
+		</style>
+		
+	</head>
+	<body>
+	  <div class="mui-bar mui-bar-nav" style="background: #{barColor};box-shadow:none;">
+			<a class="mui-icon mui-pull-left" href="backtoapp" style="height: 44px; padding-top: 0px;margin-left:-25px;">
+				 <img  src="{sysPath}/resources/onlinesurvey/images/back.png" style="width:auto;max-height:44px;">
+			</a>
+			<h1 id="title" class="mui-title" style="color: white;">网上调查</h1>
+	  </div>
+	  <!--下拉刷新容器-->
+		<div id="pullrefresh" class="mui-content mui-scroll-wrapper" style="padding-top: 44px;">
+			<div class="mui-scroll">
+			<input type="hidden" id="kindMin" name="kindMin" value="{kindMin}"/>
+			<input type="hidden" id="clienttype" name="clienttype" value="{clienttype}"/>
+			<input type="hidden" id="resourceid" name="resourceid" value="{resourceid}"/>
+			<input type="hidden" id="barColor" name="barColor" value="{barColor}"/>
+			<input type="hidden" id="kindtotle" name="kindtotle" value="{kindtotle}"/>
+				<!--数据列表-->
+				 <img  src="{sysPath}/resources/onlinesurvey/images/ques.png" style="min-width: 100%;max-width: 100%; vertical-align: bottom;margin-bottom: 1px;" >
+				<ul class="mui-table-view mui-table-view-chevron">
+				 <!--body-->   
+				</ul>
+			</div>
+		</div>
+	 
+	  
+	</body>
+	<script src="{sysPath}/resources/onlinesurvey/js/jquery-1.8.3.min.js"></script>
+	<script src="{sysPath}/resources/onlinesurvey/js/mui.min.js"></script>	
+	<script src="{sysPath}/resources/onlinesurvey/js/layer.m.js"></script>	
+	<script>
+		mui.init({
+			pullRefresh: {
+				container: '#pullrefresh',
+				up: {
+					contentrefresh: '正在加载...',
+					contentnomore:'',
+					callback: pullupRefresh
+				}
+			}
+		});
+		
+
+		/**
+		 * 上拉加载具体业务实现
+		 */
+		function pullupRefresh() { 
+			var kindMin =  parseInt($('#kindMin').val())+10;
+			var clienttype =  parseInt($('#clienttype').val());
+			var resourceid = $('#resourceid').val();
+			var kindtotle = $('#kindtotle').val();
+			
+			
+			setTimeout(function() {
+				
+				if(parseInt(kindMin)>parseInt(kindtotle)){
+					layer.open({
+		        	    content: '没有更多内容了',
+		        	    style: 'background-color:#545454; color:#fff; border:none;top:-100px;text-align:center;',
+		       	        time: 2
+		        });
+			//		$('div.mui-pull-bottom-pocket').css("height","0px");
+					mui('#pullrefresh').pullRefresh().endPullupToRefresh((true));
+					mui('#pullrefresh').pullRefresh().refresh(true);
+					return;
+					}
+				
+				kindtotle = parseInt(kindtotle);
+				$.ajax({
+					type : "GET",
+					url :'{sysPath}/interfaces/loadmoretitle.do?kindMin='+kindMin+'&resourceid='+resourceid,
+					success : function(msg) {
+						var result = msg;
+						if(result=='fail'){
+							layer.open({
+				        	    content: '请求超时',
+				        	    style: 'background-color:#545454; color:#fff; border:none;top:-100px;text-align:center;',
+				        	    time: 2
+				        });
+
+							mui('#pullrefresh').pullRefresh().endPullupToRefresh((false)); //参数为true代表没有更多数据了
+							return;
+						}
+						$('#kindMin').val(kindMin);
+						var arrays=result.split("$");
+						mui('#pullrefresh').pullRefresh().endPullupToRefresh((result == '')); //参数为true代表没有更多数据了。
+						var table = document.body.querySelector('.mui-table-view');
+						var cells = document.body.querySelectorAll('.mui-table-view-cell');
+						var j=0;
+						for (var i = cells.length, len = i + arrays.length; i < len; i++) {
+							var li = document.createElement('li');
+							li.className = 'mui-table-view-cell';
+							li.innerHTML = arrays[j];
+							table.appendChild(li);
+							j=j+1;
+						}
+						mui('#pullrefresh').pullRefresh().endPullupToRefresh((result == ''));
+					}
+				});
+				
+				
+			}, 1500);
+			
+		}
+		
+			
+			function result(kindid,kindtype,kindMin,kindshowresult,quesid,quesisshow){
+				var barColor = $('#barColor').val();
+				var clienttype = $('#clienttype').val();
+				var resourceid = $('#resourceid').val();
+				
+				if((kindtype==1)&&kindshowresult!=1){
+					layer.open({
+		        	    content: '调查结果暂不对外公开',
+		        	    style: 'background-color:#545454; color:#fff; border:none;top:-100px;text-align:center;',
+		        	    time: 2
+		        });
+
+					return;
+				}
+				if((kindtype==0)&&quesisshow!=1){
+					layer.open({
+		        	    content: '调查结果暂不对外公开',
+		        	    style: 'background-color:#545454; color:#fff; border:none;top:-100px;text-align:center;',
+		        	    time: 2
+		        });
+					return;
+				}
+			
+					$.ajax({
+						type : "GET",
+						url :'{sysPath}/interfaces/resultjson.do',
+						data :{"kindid":kindid,"kindtype":kindtype,"resourceid":resourceid,"kindMin":kindMin,"quesid":quesid},		
+						success : function(msg) {
+							var result = msg;
+							if(result=='fail'){
+								layer.open({
+					        	    content: '系统错误',
+					        	    style: 'background-color:#545454; color:#fff; border:none;top:-100px;text-align:center;',
+					        	    time: 2
+					        });
+								return;
+							}else if(result=='empty'){
+								layer.open({
+					        	    content: '暂无结果',
+					        	    style: 'background-color:#545454; color:#fff; border:none;top:-100px;text-align:center;',
+					        	    time: 2
+					        });
+							}else if(result=='no'){
+								layer.open({
+					        	    content: '简答题不公开结果',
+					        	    style: 'background-color:#545454; color:#fff; border:none;top:-100px;text-align:center;',
+					        	    time: 2
+					        });
+								return;
+							}else if(result=='success'){
+						
+								window.location.href= "{sysPath}/interfaces/resultpage.do?kindMin="+kindMin+"&kindid="+kindid+"&quesid="+quesid+"&resourceid="+resourceid+"&clienttype="+clienttype+"&barColor="+barColor;
+								return;
+							}
+						
+						}
+					});
+			}
+			
+			function question(kindid,kindtype,kindMin,kindshowresult,quesid,quesisshow){
+				var barColor = $('#barColor').val();
+				var clienttype = $('#clienttype').val();
+				var resourceid = $('#resourceid').val();
+			
+					$.ajax({
+						type : "GET",
+						url :'{sysPath}/interfaces/quesjson.do',
+						data :{"kindid":kindid,"kindtype":kindtype,"resourceid":resourceid,"kindMin":kindMin,"quesid":quesid},		
+						success : function(msg) {
+							var result = msg;
+							if(result=='fail'){
+								layer.open({
+					        	    content: '系统错误',
+					        	    style: 'background-color:#545454; color:#fff; border:none;top:-100px;text-align:center;',
+					        	    time: 2
+					        });
+								return;
+							}else if(result=='empty'){
+								layer.open({
+					        	    content: '暂无内容',
+					        	    style: 'background-color:#545454; color:#fff; border:none;top:-100px;text-align:center;',
+					        	    time: 2
+					        });
+								return;
+							}else if(result=='success'){
+								window.location.href= "{sysPath}/interfaces/quespage.do?kindMin="+kindMin+"&kindid="+kindid+"&quesid="+quesid+"&resourceid="+resourceid+"&barColor="+barColor+"&kindshowresult="+kindshowresult;
+								return;
+							}
+						
+						}
+					});
+			}
+		
+	</script>
+</html>

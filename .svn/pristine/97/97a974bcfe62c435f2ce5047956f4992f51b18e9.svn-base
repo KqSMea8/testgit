@@ -1,0 +1,301 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=0.5, minimum-scale=0.5, user-scalable=no" />
+        <title>{title}</title> 
+            <script src="{jmpurl}/ui/lib/jquery/jquery-1.8.3.min.js"></script>
+            <script src="{jmpurl}/resources/jmp/interface/script/swipe.js"></script>
+            <script type="text/javascript" language="javascript">
+                $(document).ready(function() {
+                                  var mySwiper = new Swiper('.swiper-container',{
+                                                            pagination: '.pagination',
+                                                            paginationClickable: true
+                                                            });
+                                  });
+                $(function(){
+                  document.addEventListener('touchstart',function(){},false);
+                  })
+                  
+                  function setsize()
+                  {
+                      //alert(document.body.clientHeight);
+                      var tophight = document.getElementById("top").clientHeight;
+                      var centerhight = document.body.clientHeight - tophight; 
+                  }
+
+                function fixImage2(ImgD,width,height){   
+                	var clientWidth=document.body.clientWidth;
+                	width=clientWidth;
+                	height=width*0.8; 
+            		var image=new Image();    
+            	    image.src=ImgD.src;
+            	     
+            		imgw = image.width;
+            		imgh = image.height;
+            		if(imgw*1>width){
+            			imgh = imgh/imgw*width;
+            			imgw=width;
+            		}
+            		if(imgh*1>height){
+            			imgw = imgw/imgh*height;
+            			imgh=height;
+            		}
+            		ImgD.width = imgw;    
+                    ImgD.height = imgh;    
+            	}
+				
+                </script>
+                <script for="window" event="onresize" language=javascript>
+
+                    var tophight = document.getElementById("top").clientHeight;
+                    var centerhight = document.body.clientHeight - tophight; 
+                
+                </script>
+                <style>
+
+
+
+				/*
+ * Swiper - Mobile Touch Slider CSS
+ * http://www.idangero.us/sliders/swiper
+ *
+ * Vladimir Kharlampidi, The iDangero.us
+ * http://www.idangero.us/
+ * 
+ * Copyright 2012-2013, Vladimir Kharlampidi
+ * The iDangero.us
+ * http://www.idangero.us
+ *
+ * Licensed under GPL & MIT
+ *
+*/
+
+/* ===============================================================
+Basic Swiper Styles 
+================================================================*/
+.swiper-container {
+	margin: 0 0 0px 0;
+	position: relative;
+	overflow: hidden;
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+	-ms-backface-visibility: hidden;
+	-o-backface-visibility: hidden;
+	backface-visibility: hidden;
+	/* Fix of Webkit flickering */
+	z-index: 1;
+	height: 0px;
+}
+.swiper-wrapper {
+	position:relative;
+	width:100%;
+	-webkit-transition-property:-webkit-transform, left, middle;
+	-webkit-transition-duration:0s;
+	-webkit-transform:translate3d(0px,0,0);
+	-webkit-transition-timing-function:ease;
+
+	-moz-transition-property:-moz-transform, left, middle;
+	-moz-transition-duration:0s;
+	-moz-transform:translate3d(0px,0,0);
+	-moz-transition-timing-function:ease;
+
+	-o-transition-property:-o-transform, left, middle;
+	-o-transition-duration:0s;
+	-o-transform:translate3d(0px,0,0);
+	-o-transition-timing-function:ease;
+	-o-transform:translate(0px,0px);
+
+	-ms-transition-property:-ms-transform, left, middle;
+	-ms-transition-duration:0s;
+	-ms-transform:translate3d(0px,0,0);
+	-ms-transition-timing-function:ease;
+
+	transition-property:transform, left, middle;
+	transition-duration:0s;
+	transform:translate3d(0px,0,0);
+	transition-timing-function:ease;
+}
+.swiper-free-mode > .swiper-wrapper {
+	-webkit-transition-timing-function: ease-out;
+	-moz-transition-timing-function: ease-out;
+	-ms-transition-timing-function: ease-out;
+	-o-transition-timing-function: ease-out;
+	transition-timing-function: ease-out;
+	margin: 0 auto;
+}
+.swiper-slide {
+	float: left;
+	width:100%;
+	position: relative;
+	
+}
+
+/* IE10 Windows Phone 8 Fixes */
+.swiper-wp8-horizontal {
+	-ms-touch-action: pan-y;
+}
+.swiper-wp8-vertical {
+	-ms-touch-action: pan-x;
+}
+.swipe_span{
+	position:absolute;
+	z-index:2;
+	top:70%;
+	height:418px;
+	left:0;
+	background-image: url(./bg.png);
+	background-repeat:inherit;
+	width: 100%;
+	padding: 4px 0px 0px 6px;
+	margin:0;
+	font-size:16px;
+	color: white;
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	text-shadow: none;
+	text-align: left;
+}
+.swipe_img{
+	color:white; 
+	width:100%; 
+	height:70%; 
+	text-align:left;  
+	text-shadow:none;
+	margin: 10px 0px 0px 0px;
+	vertical-align:middle; 
+	text-align: center; 
+	padding-bottom: 0px;
+	overflow: hidden;
+}
+
+.swipe_img img { 
+	vertical-align:middle; 
+}
+
+
+.swiper-pagination-switch {
+		height: 3px;
+		width: 6px;
+	}
+.pagination {
+		 
+	}
+	
+.swiper-pagination-switch {
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	border-radius: 0px;
+	background: #f3f3f3;
+	margin-right: 18px;
+	opacity: 0.8;
+	cursor: pointer;
+}
+.swiper-active-switch {
+	background: #777777;
+}
+
+/* ===============================================================
+Your custom styles, here you need to specify container's and slide's
+sizes, pagination, etc.
+================================================================*/
+.swiper-container {
+	/* Specify Swiper's Size: */
+
+	/*width:200px;
+	height: 100px;*/
+}
+.swiper-slide {
+	/* Specify Slides's Size: */
+
+	/*width: 100%;
+	height: 100%;*/
+}
+.swiper-slide-active {
+	/* Specific active slide styling: */
+
+}
+.swiper-slide-visible {
+	/* Specific visible slide styling: */	
+
+}
+/* ===============================================================
+Pagination Styles
+================================================================*/
+.swiper-pagination-switch {
+	/* Stylize pagination button: */	
+
+}
+.swiper-active-switch {
+	/* Specific active button style: */	
+
+}
+.swiper-visible-switch {
+	/* Specific visible button style: */	
+
+}
+
+
+
+
+                    .hd_button{background:url("");}
+                    .hd_button:active{background:url("bg.png");}
+                    .td1{border-bottom-style:solid;border-bottom-width:1px;border-color:#dbdbdb;}
+                    .td2{border-left-style:solid;border-left-width:1px;border-color:#dbdbdb;
+                    border-right-style:solid;border-right-width:1px;border-color:#dbdbdb;
+                    border-bottom-style:solid;border-bottom-width:1px;border-color:#dbdbdb;}
+                
+                
+                
+                html,body
+                {
+                    width:100%;
+                    height:100%;
+                    margin:0px;
+                    padding:0px; 
+                    border:0px; 
+                    overflow:hidden;
+                    /* overflow-x: scroll; */
+                }
+                
+                /***图片居中方法***/
+				.bigpic {
+					height:100%;
+					width:100%;
+					display: table-cell;
+					vertical-align:middle;
+					text-align:center;
+				}
+				.swipe_img i {
+    display:inline-block;
+    height:100%;
+    vertical-align:middle
+    }
+				
+				.bigpic img { 
+					vertical-align:middle; 
+				}
+                </style>
+                
+                
+            </head>
+     <body onload="setsize()">
+        <div class="swiper-container" id="top" style="height:100%;width:100%; margin:0 auto; border:0px solid #ffd481;background-color:#080808">
+            <div class="swiper-wrapper" id="apps_myswipe">
+                <!--pic start-->
+                <div class="swiper-slide">
+                    <div class="swipe_img">
+                          <i></i><img src="{picpath}"  onload="fixImage2(this, 1000, 564)"/>  
+                    </div>
+                    <div style="text-align:left;margin-top:60px;margin-left:20px"><font color="#FFFFFF" size="6">{title}</font></div>
+					<div style="text-align:left;margin-top:10px;overflow-y:scroll;margin-left:20px;"><font color="#FFFFFF" size="4">{picnote}</font></div> 
+                </div>
+                <!--pic end-->
+            </div>
+            <span class="swipe_span"></span>
+            <div class="pagination"></div>
+        </div>
+     </body>    
+</html>

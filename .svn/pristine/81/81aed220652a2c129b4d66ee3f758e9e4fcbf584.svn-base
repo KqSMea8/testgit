@@ -1,0 +1,17 @@
+#test  URL
+testurl.success=URL authentication is successful
+testurl.fail=URL validation fails
+
+#operation
+add.fail=add fail
+modify.fail=modify fail
+remove.fail=remove fail
+opr.success=opr success
+opr.fail=opr fail
+
+#pushGroup
+pushgroup.remove.fail.havechild=remove fail\uff0cgroup have child
+
+
+#pushType
+pushtype.remove.fail.havechild=remove fail\uff0ctype have child

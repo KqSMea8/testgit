@@ -1,0 +1,11 @@
+<div class="mui-content" style="margin-top:10px;height:auto;background-color:white;padding: 10px 10px; width: 100%;min-height: 200px;">
+	      <p style="font-size: 16px;">查询历史</p>
+	      <table style="text-align: center;width: 90%;font-size: 14px;color: #8f8f94;line-height: 30px;margin-left: 10px;">
+	          <tr style="font-size: 16px;">
+	               <td width="50%">受理编号</td>
+	               <td width="50%">查询码</td>
+	          </tr>
+	           <!--history start-->
+	           <!--history end-->
+	      </table>
+</div>

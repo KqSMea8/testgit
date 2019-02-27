@@ -1,0 +1,8 @@
+<div style="background-color:white;margin-top:{top}">	
+	   <div class="mui-input-row" style="padding-bottom:0px">
+			<div style="line-height: 30px;width:90%;">{title}</div>
+			<div class="questype">{questype}</div>
+	   </div>
+	   	{body}
+</div>	
+			

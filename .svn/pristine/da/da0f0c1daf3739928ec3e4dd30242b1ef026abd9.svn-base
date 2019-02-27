@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>意见征集</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="{sysPath}/resources/solicitopinion/css/mui.min.css">
+		<link rel="stylesheet" href="{sysPath}/resources/solicitopinion/js/need/layer.css">
+		<style>
+			html,body {
+				background-color: #f2f2f2;
+				font-size:18px;
+			}
+			.mui-bar-nav~.mui-content{
+				padding: 0;
+			}
+			
+			.title{
+				margin: 20px 15px 7px;
+				color: #6d6d72;
+				font-size: 15px;
+			}
+			.mui-icon-left-nav:before{content:"\e471"; color: white; font-size: 20px;}
+			.tip{
+			font-size: 12px;
+			}
+			.mui-table-view-cell:after{width:100%;left:0px;right:0px;}
+			
+			.mui-icon-left-nav:before{
+			font-size:25px;
+			}
+			.mui-title {
+ 			font-size: 20px;
+			}
+		     /*设置因滚动条而出现的div高度为0*/
+			 .mui-pull-bottom-pocket{
+			 height:0px;
+		 	 }	
+		</style>
+	</head>
+	<body>
+	  <div class="mui-bar mui-bar-nav" style="background: #{barColor};box-shadow:none;">
+			<a class="{back} mui-icon mui-pull-left" href="backtoapp" style="height: 44px; padding-top: 0px;margin-left:-25px;">
+				<img  src="{sysPath}/resources/solicitopinion/images/back.png" style="width:auto;max-height:44px;">
+			</a>
+			<h1 id="title" class="mui-title" style="color: white;">意见征集</h1>
+	  </div>
+	  <div id="pullrefresh" class="mui-content mui-scroll-wrapper" style="padding-top: 44px;">
+	  <div class="mui-scroll">
+	  	<input type="hidden" id="barColor" name="barColor" value="{barColor}"/>
+	       <img  src="{sysPath}/resources/solicitopinion/images/idea.png" style="min-width: 100%;max-width: 100%;vertical-align: bottom;margin-bottom:1px;display: {bgshow}" >
+	        <ul class="mui-table-view" style="line-height: 40px;">
+			<!--body-->					
+	  </ul>
+	  </div>
+	  </div>
+	 
+	  
+	</body>
+	<script src="{sysPath}/resources/solicitopinion/js/jquery-1.8.3.min.js"></script>
+	<script src="{sysPath}/resources/solicitopinion/js/mui.min.js"></script>
+	<script src="{sysPath}/resources/solicitopinion/js/layer.m.js"></script>
+	<script>
+	mui.init({
+		pullRefresh: {
+			container: '#pullrefresh',
+			up: {
+				contentrefresh: '正在加载...',
+				contentnomore:'',
+				callback: pullupRefresh
+			}
+		}
+	});
+	function pullupRefresh(){
+		mui('#pullrefresh').pullRefresh().endPullupToRefresh((true)); 
+		return;
+	}
+
+		function content(resourceid, sysid, typeid, topicMin){
+		
+			var barColor = $('#barColor').val();
+			$.ajax({
+				type : "GET",
+				url :'{sysPath}/interfaces/titlejson.do',
+				data :{"resourceid":resourceid,"typeid":typeid,"topicMin":topicMin},		
+				success : function(msg) {
+					var result = msg;
+					if(result=='fail'){
+						layer.open({
+			        	    content: '系统错误',
+			        	    style: 'background-color:#545454; color:#fff; border:none;top:-100px;text-align:center;',
+			        	    time: 2
+			        });
+
+						return;
+					}else if(result=='empty'){
+						layer.open({
+			        	    content: '暂无内容',
+			        	    style: 'background-color:#545454; color:#fff; border:none;top:-100px;text-align:center;',
+			        	    time: 2
+			        });
+					}else if(result=='success'){
+						window.location.href= "{sysPath}/interfaces/titlepage.do?typeid="+typeid+"&sysid="+sysid+"&resourceid="+resourceid+"&barColor="+barColor;
+						return;
+					}
+				
+				}
+			});
+		}
+	</script>
+</html>

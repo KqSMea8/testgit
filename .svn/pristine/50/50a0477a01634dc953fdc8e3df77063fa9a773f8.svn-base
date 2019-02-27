@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>部门选择</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="{sysUrl}/resources/mailbox/css/mui.min.css">
+		<style>
+			html,body {
+				background-color: #f2f2f2;
+			}
+			.mui-bar-nav~.mui-content{
+				padding: 0;
+			}
+			
+			.title{
+				margin: 20px 15px 7px;
+				color: #6d6d72;
+				font-size: 15px;
+			}
+			.mui-icon-left-nav:before{content:"\e471"; color: white;}
+			.mui-content>.mui-table-view:first-child {margin-top: 0px;}
+		</style>
+	</head>
+	<body>
+	  <div class="mui-bar mui-bar-nav" style="width:750px; height:64px;padding-top:10px; background: white;">
+	        <input type="hidden" id="color" name="color" value="{color}"></input>
+	        <input type="hidden" id="sysid" name="sysid" value="{sysid}"></input>
+	        <input type="hidden" id="uuid" name="uuid" value="{uuid}"></input>
+	        <input type="hidden" id="resourceid" name="resourceid" value="{resourceid}"></input>
+	        <input type="hidden" id="clienttype" name="clienttype" value="{clienttype}"></input>
+	        <a class="mui-action-back mui-icon mui-pull-left" style="height: 44px; padding-top: 0px;">
+			   <img  src="{sysUrl}/resources/mailbox/images/back.png" style="max-width: 50%;">
+			</a>
+			<a class="mui-icon mui-pull-right" style="height: 64px;">
+			   <div style="background-color: #E6544C;width: 5px; height: 22px;"></div>
+			</a>
+			<h1 id="title" class="mui-title " style="color: black; font-size: 20px;right: 25px;text-align: right;">部门选择</h1>
+	  </div>
+	  <div class="mui-content" style="padding-top: 44px;height:auto;">
+	        <ul class="mui-table-view" style="line-height: 40px;">
+				<!--grouplist  start-->
+				<!--grouplist  end-->			
+	  </ul>
+	  </div>
+	 
+	  
+	</body>
+	<script src="{sysUrl}/resources/mailbox/js/jquery-1.8.3.min.js"></script>
+	<script src="{sysUrl}/resources/mailbox/js/mui.min.js"></script>
+	<script>
+		mui.init({
+			swipeBack:true //启用右滑关闭功能
+		});
+
+        function goContent(groupiid){
+             var groupid = groupiid;
+             var sysid = $("#sysid").val();
+             var uuid = $("#uuid").val();
+             var color = $("#color").val();
+             var resourceid = $("#resourceid").val();
+             var clienttype = $("#clienttype").val();
+        	 window.location.href="{sysUrl}/interfaces/mailbox/col/writemail.do?sysid=" + sysid+"&uuid="+uuid+"&color="+color+"&groupid="+groupid+ "&resourceid=" + resourceid +"&clienttype=" + clienttype;
+        }
+		
+	</script>
+</html>

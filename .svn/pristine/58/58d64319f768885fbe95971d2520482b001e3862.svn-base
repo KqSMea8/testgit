@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
+	>	
+	
+	<!-- 栏目管理DAO -->
+	<bean class="com.hanweb.jmp.cms.dao.cols.ColDAO"></bean>
+	<bean class="com.hanweb.jmp.cms.dao.cols.ColRelationDAO"></bean>
+	<bean class="com.hanweb.jmp.cms.dao.cols.ColFieldDAO"></bean>
+	
+	<!-- 导航管理 -->
+	<bean class="com.hanweb.jmp.cms.dao.channels.ChannelDAO"></bean>
+	<bean class="com.hanweb.jmp.cms.dao.channels.ChannelColDAO"></bean>
+	
+	<!-- 信息管理DAO -->
+	<bean class="com.hanweb.jmp.cms.dao.infos.InfoDAO"></bean>
+	<bean class="com.hanweb.jmp.cms.dao.infos.InfoExpandDAO"></bean>
+	<bean class="com.hanweb.jmp.cms.dao.infos.InfoOperDAO"></bean>
+	<bean class="com.hanweb.jmp.cms.dao.infos.InfoCountDAO"></bean>
+	<bean class="com.hanweb.jmp.cms.dao.infos.PicDAO"></bean>
+	
+	<!-- 角标管理DAO -->
+	<bean class="com.hanweb.jmp.cms.dao.sign.SignDAO"></bean>
+	<bean class="com.hanweb.jmp.cms.dao.sign.SignRelDAO"></bean>
+	
+	<!-- 报料管理DAO -->
+	<bean class="com.hanweb.jmp.apps.dao.broke.BrokeDAO"></bean>
+	<bean class="com.hanweb.jmp.apps.dao.broke.BrokeTypeDAO"></bean>
+	
+	<!-- 评论管理 -->
+	<bean class="com.hanweb.jmp.cms.dao.comment.CommentDAO"></bean>
+	
+	<!-- 通讯录管理DAO -->
+	<bean class="com.hanweb.jmp.apps.dao.numbersense.NumSenseColDAO"></bean>
+	<bean class="com.hanweb.jmp.apps.dao.numbersense.NumSensePhoneDAO"></bean>
+	
+	<!-- 阅读管理DAO -->
+	<bean class="com.hanweb.jmp.apps.dao.read.ReadDAO"></bean>
+	
+	<!-- 轻应用管理DAO -->
+	<bean class="com.hanweb.jmp.apps.dao.manage.LightAppDAO"></bean>
+	
+	<!-- 素材管理-图片管理DAO -->
+	<bean class="com.hanweb.jmp.cms.dao.matters.picture.PictureDAO"></bean>
+	<bean class="com.hanweb.jmp.cms.dao.matters.picture.PictureColDAO"></bean>
+	
+	<!-- 素材管理-音视频管理DAO -->
+	<bean class="com.hanweb.jmp.cms.dao.matters.video.VideoDAO"></bean>
+	<bean class="com.hanweb.jmp.cms.dao.matters.video.VideoColDAO"></bean>
+	
+	<!-- 素材管理-附件管理DAO -->
+	<bean class="com.hanweb.jmp.cms.dao.matters.doc.DocDAO"></bean>
+	<bean class="com.hanweb.jmp.cms.dao.matters.doc.DocColDAO"></bean>
+	
+	<!-- 站点管理DAO -->
+	<bean class="com.hanweb.jmp.sys.dao.sites.SiteDAO"></bean>
+	<bean class="com.hanweb.jmp.sys.dao.sites.SiteSplashDAO"></bean>
+	
+	<!-- 参数设置DAO -->
+	<bean class="com.hanweb.jmp.sys.dao.parameter.ParameterDAO"></bean>
+	
+	<!-- 意见反馈DAO -->
+	<bean class="com.hanweb.jmp.sys.dao.feedback.FeedBackDAO"></bean>
+	
+	<!-- 渠道管理DAO -->
+	<bean class="com.hanweb.jmp.sys.dao.ditch.DitchDAO"></bean>
+	<bean class="com.hanweb.jmp.sys.dao.ditch.SynFieldDAO"></bean>
+	
+	<!-- 收藏管理DAO -->
+	<bean class="com.hanweb.jmp.sys.dao.collect.CollectDAO"></bean>
+	
+	<!-- 日志管理DAO -->
+	<bean class="com.hanweb.jmp.sys.dao.log.LogDAO"></bean>
+	<bean class="com.hanweb.jmp.sys.dao.log.LogConfigDAO"></bean>
+	<bean class="com.hanweb.jmp.sys.dao.log.OfflineZipDAO"></bean>
+	<bean class="com.hanweb.jmp.sys.dao.log.PushInfoLogDAO"></bean>
+	<bean class="com.hanweb.jmp.sys.dao.log.InterfaceLogDAO"></bean>
+	
+	<!-- 版本更新DAO -->
+	<bean class="com.hanweb.jmp.sys.dao.version.VersionDAO"></bean>
+	
+	<!-- 网站字段管理DAO -->
+	<bean class="com.hanweb.jmp.sys.dao.field.FieldDAO"></bean> 
+	
+	<!-- 角色管理DAO -->
+	<bean class="com.hanweb.jmp.sys.dao.role.RoleColDAO"></bean>
+	<bean class="com.hanweb.jmp.sys.dao.role.RolePushTypeDAO"></bean>
+	
+	<!-- 全局DAO -->
+	<bean class="com.hanweb.jmp.global.dao.CacheDataDAO"></bean>
+	<bean class="com.hanweb.jmp.global.dao.GoodRecordDAO"></bean>
+	<bean class="com.hanweb.jmp.global.dao.OutSideUserSubscribeColRelDAO"></bean>
+	<bean class="com.hanweb.jmp.global.dao.PushThreadDAO"></bean>
+	
+	<!-- 调查管理DAO -->
+	<bean class="com.hanweb.jmp.apps.dao.survey.SurveyDAO"></bean>
+	<bean class="com.hanweb.jmp.apps.dao.survey.SurveyAnswerDAO"></bean>
+	<bean class="com.hanweb.jmp.apps.dao.survey.QuestionDAO"></bean>
+	<bean class="com.hanweb.jmp.apps.dao.survey.SurveyResultDAO"></bean>
+	<bean class="com.hanweb.jmp.apps.dao.survey.AnswerDAO"></bean>
+	<bean class="com.hanweb.jmp.apps.dao.survey.UserVoteCountDAO"></bean>
+	
+	<!-- 一键打包DAO -->
+	<bean class="com.hanweb.jmp.pack.backstage.dao.ApplicationDAO"></bean>
+	<bean class="com.hanweb.jmp.pack.dao.ApplicationDAO"></bean>
+	<bean class="com.hanweb.jmp.pack.dao.AppUserDAO"></bean>
+	<bean class="com.hanweb.jmp.pack.dao.ClientDAO"></bean>
+	
+	<!-- 功能管理 -->
+	<bean class="com.hanweb.jmp.cms.dao.function.LayoutDAO"></bean>
+	
+	<!-- 群组管理 -->
+	<bean class="com.hanweb.jmp.newspush.peoplelist.dao.PeoplelistDAO"></bean>
+	<bean class="com.hanweb.jmp.newspush.peoplelist.dao.PeoplelistRelationDAO"></bean>
+	
+	<bean class="com.hanweb.jmp.newspush.userdevice.dao.UserDeviceDAO"></bean>
+	<bean class="com.hanweb.jmp.newspush.news.dao.NewsDetailDAO"></bean>
+</beans>

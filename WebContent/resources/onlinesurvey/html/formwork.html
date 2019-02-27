@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>网上调查</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="{sysPath}/resources/onlinesurvey/css/mui.min.css">
+		<link rel="stylesheet" href="{sysPath}/resources/onlinesurvey/js/need/layer.css">
+		<link rel="stylesheet" href="{sysPath}/resources/onlinesurvey/css/iconfont.css">
+		<style>
+			html,body {
+				background-color: #f2f2f2;
+				font-size: 16px;
+			}
+			.mui-bar-nav~.mui-content{
+				padding: 0;
+			}
+			
+			.title{
+				margin: 20px 15px 7px;
+				color: #6d6d72;
+				font-size: 15px;
+			}
+			.mui-icon-left-nav:before{content:"\e471"; color: white;}
+			.mui-icon-checkmarkempty:before { content: "\e472";color:white;font-size:45px;}
+			.mui-checkbox input[type=checkbox]:checked:before, .mui-radio input[type=radio]:checked:before {color: #cccccc; font-size: 20px;	}
+			.mui-checkbox input[type=checkbox]:before, .mui-radio input[type=radio]:before{font-size: 20px;}
+			.mui-input-row{
+				padding:6px 15px;
+				min-height:50px;
+			}
+			/*标题分割线以外的线右外边距 */
+			.mui-input-group .mui-input-row:after{
+			right:15px;
+			}
+			/*标题div */
+			.mui-input-group .mui-input-row:first-child{
+			height:100%;
+			}
+			/*题目标题与选项分隔线 */
+			.mui-input-group .mui-input-row:first-child:after{
+			width:100%;
+			left:0px;
+			right:0px;
+			}
+			/*最后一个选项没有分隔线 */
+			.mui-input-group .mui-input-row:last-child:after{
+			height:0px;
+			}
+			.mui-input-group .mui-input-row.noline:after{
+			height:0px;
+			}
+		
+			/*题目标题 */
+			.mui-input-row label{
+			width:90%;
+			font-size:12px;
+			color:#808080;
+			line-height:20px;
+			padding-left:0px;
+			}
+			.mui-input-row .mui-radio,.mui-input-row .mui-checkbox{
+			vertical-align: middle;
+			}
+			/*题目类型 */
+			.questype{
+			background-color:#{barColor};
+			width:50px;height:20px;
+			color:white;text-align:center;
+			font-size:12px;margin-top:10px;
+			margin-bottom:10px;
+			}
+		  .mui-checkbox input[type=checkbox], .mui-radio input[type=radio]{
+			  position: absolute;
+			  top: 50%; 
+			  margin-top: -14px;
+			 
+			  }
+		  .tip{
+		  line-height: 30px;
+		  width:90%;
+		  margin-left:15px;
+		  margin-top:10px;
+		  }
+		  .mui-radio input[type=radio]:before {
+			  font-size: 20px;
+			}
+		.mui-input-group:after{
+		height:0px;
+		}
+	
+		 .mui-icon-left-nav:before{
+		 font-size:25px;
+		 }
+		 .mui-title {
+ 		 font-size: 20px;
+		 }
+		 /*设置因滚动条而出现的div高度为0*/
+		 .mui-pull-bottom-pocket{
+		 height:0px;
+		 }
+		 .mui-content{
+		 background-color:#f2f2f2;
+		 }
+		 
+		</style>
+	</head>
+	<body>
+	  <div class="mui-bar mui-bar-nav" style="background: #{barColor};">
+			<a class="mui-action-back mui-icon mui-pull-left" style="height: 44px; padding-top: 0px;margin-left:-25px;">
+				 <img  src="{sysPath}/resources/onlinesurvey/images/back.png" style="width:auto;max-height:44px;">
+			</a>
+			<a id="submit" class="mui-icon  mui-pull-right" style="padding-top:1px;margin-right:-25px;" onClick="submit()">
+				 <img  src="{sysPath}/resources/onlinesurvey/images/submit.png" style="width:auto;max-height:44px;">
+			</a>
+			<h1 id="title" class="mui-title" style="color: white;">网上调查</h1>
+	  </div>
+	  <div id="pullrefresh" class="mui-content mui-scroll-wrapper" style="padding-top: 44px;height:100%;padding-bottom: 10px;">
+	  <div id="scroll" class="mui-scroll">
+	      <input type="hidden" name="kindid" id="kindid" value="{kindid}"/>
+	      <input type="hidden" name="quesid" id="quesid" value="{quesid}"/>
+	      <input type="hidden" name="barColor" id="barColor" value="{barColor}"/>
+	      <input type="hidden" name="resourceid" id="resourceid" value="{resourceid}"/>
+	      <input type="hidden" name="kindshowresult" id="kindshowresult" value="{kindshowresult}"/>
+	      <input type="hidden" name="nums" id="nums" value="{nums}"/>
+	      <form class="mui-input-group" style="background-color:#f2f2f2;height:100%">
+	     
+	    
+	     	 	<!--body-->
+		 </form>
+	  </div>
+	  </div>
+	 
+	  
+	</body>
+	<script src="{sysPath}/resources/onlinesurvey/js/jquery-1.8.3.min.js"></script>
+	<script src="{sysPath}/resources/onlinesurvey/js/mui.min.js"></script>
+	<script src="{sysPath}/resources/onlinesurvey/js/layer.m.js"></script>
+	<script>
+	mui.init({
+		swipeBack:true ,//启用右滑关闭功能
+		pullRefresh: {
+			container: '#pullrefresh',
+			up: {
+				contentnomore:'',
+				callback: pullupRefresh
+			}
+		}
+	});
+	
+	
+	function pullupRefresh(){
+		mui('#pullrefresh').pullRefresh().endPullupToRefresh((true)); 
+		return;
+	}
+		
+	function submit(){  
+			
+			var kindid = $('#kindid').val();
+			var quesid = $('#quesid').val();
+			var resourceid = $('#resourceid').val();
+			var kindshowresult = $('#kindshowresult').val();
+			var clienttype = $('#clienttype').val();
+			var barColor = $('#barColor').val();
+			var nums = $('#nums').val();
+			var subresult = ""; 
+			for(var i=1;i<=nums;i++){
+				var quesempty = i+"_quesempty";
+				var type = i+"_type";
+				var id = $('#'+i+'_id').val();
+				var answer = "";
+				var textarea = "null";
+			
+		        if($('#'+type).val()==0){
+		        	if(typeof($("input[name='"+i+"_radio']:checked").val())=="undefined"){
+		  				answer = "";
+		            }else{
+			        	answer = $("input[name='"+i+"_radio']:checked").val();
+		            }
+		        	//单选判断是否有textarea文本输入值
+		        	if(typeof($('#'+i+'_text').val())=="undefined"){
+
+		            }else if($('#'+i+'_text').val()==""){
+			        	
+		            }else{
+		            	var s = $('#'+i+'_text').val();
+		            	if(s.length>200){
+		            		layer.open({
+				        	    content: '字数长度超过限定值！',
+				        	    style: 'background-color:#545454; color:#fff; border:none;top:-100px;text-align:center;',
+				        	    time: 3
+				        });
+
+		    				return false;
+		                }else{
+		                	textarea = s;                	
+		                }
+		            }
+		        	
+		        }else if($('#'+type).val()==1){
+		        	
+		        	var i_num = $('#'+i+'_num').val();//获取选项个数
+		        	
+		        	for(var j=1;j<=i_num;j++){
+						if($('#'+i+'_'+j).attr("checked")){
+		                	answer = answer + $('#'+i+'_'+j).val()+",";
+						}
+		            }
+		            var len = answer.length;
+		            answer = answer.substring(0,len-1);
+		        	
+		        }else{
+		        	answer = $('#'+i+'_text').val();
+		        	if(answer.length>200){
+		        		layer.open({
+			        	    content: '字数长度超过限定值!',
+			        	    style: 'background-color:#545454; color:#fff; border:none;top:-100px;text-align:center;',
+			        	    time: 3
+			        });
+
+						return false;
+		            }
+		        	
+		        }
+		        if($('#'+quesempty).val()==1){
+		        	if(answer.trim()==""){
+		        		layer.open({
+			        	    content: '您有未填写的题目！',
+			        	    style: 'background-color:#545454; color:#fff; border:none;top:-100px;text-align:center;',
+			        	    time: 3
+			        });
+
+		        		return false;
+		        	}        	
+		        	subresult = subresult+"＃"+id+"_"+$('#'+type).val()+"_"+answer+"_"+textarea;
+		        }else{
+		        	if(answer.trim()!=""){
+		        		subresult = subresult+"＃"+id+"_"+$('#'+type).val()+"_"+answer+"_"+textarea;
+		        	}      
+		        }
+			}
+			var length = subresult.length;
+			subresult = subresult.substring(1,length);
+			
+			$.ajax({
+				type : "GET",
+				url :'{sysPath}/interfaces/submit.do',
+				data :{"kindid":kindid,"resourceid":resourceid,"quesid":quesid,"subresult":subresult},		
+				success : function(msg) {
+					var result = msg;
+					if(result=='error'){
+						layer.open({
+			        	    content: '系统错误',
+			        	    style: 'background-color:#545454; color:#fff; border:none;top:-100px;text-align:center;',
+			        	    time: 3
+			        });
+
+						return;
+					}else if(result=='fail'){
+						layer.open({
+			        	    content: '提交失败',
+			        	    style: 'background-color:#545454; color:#fff; border:none;top:-100px;text-align:center;',
+			        	    time: 3
+			        });
+
+						return;
+					}else if(result=='success'){
+						
+						$.ajax({
+							type : "GET",
+							url :'{sysPath}/interfaces/resultjson.do',
+							data :{"kindid":kindid,"resourceid":resourceid,"quesid":quesid},		
+							success : function(msg) {
+								var result = msg;
+								if(result=='fail'||result=='no'||result=='empty'){
+								
+									layer.open({
+						        	    content: '提交成功',
+						        	    style: 'background-color:#545454; color:#fff; border:none;top:-100px;text-align:center;',
+						        	    time: 3
+						        });
+									setTimeout(function() {
+										mui.back();
+										return;
+										},1000);
+								}else if(kindshowresult==0){
+									layer.open({
+						        	    content: '提交成功,结果暂不公开',
+						        	    style: 'background-color:#545454; color:#fff; border:none;top:-100px;text-align:center;',
+						        	    time: 3
+						        });
+									setTimeout(function() {
+										mui.back();
+										return;
+										},1000);
+								}else if(result=='success'){
+								
+									layer.open({
+						        	    content: '提交成功',
+						        	    style: 'background-color:#545454; color:#fff; border:none;top:-100px;text-align:center;',
+						        	    time: 3
+						        });
+											
+									setTimeout(function() {
+										window.location.href= "{sysPath}/interfaces/resultpage.do?kindid="+kindid+"&quesid="+quesid+"&resourceid="+resourceid+"&barColor="+barColor;
+										return;
+										},1000);
+								}
+							
+							}
+						});
+						
+						return;
+					}
+				
+				}
+			});
+	    } 
+	</script>
+</html>

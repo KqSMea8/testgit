@@ -1,0 +1,10 @@
+<div style="background-color:white;margin-top:10px">
+	
+		<div class="" style="margin: 0px 10px;min-height:50px;height:100%;display:{show1};" >
+			<textarea id="{index}_text" name="{text}" class="textpart" rows="5" placeholder="在此输入内容" style="border:1px solid #f2f2f2; border-radius: 3px"></textarea>
+		</div>
+		
+		<div class="" style="margin: 20px 20px;min-height:50px;height:100%;display:{show2};">
+			简答题不对外公开结果
+		</div>
+</div>

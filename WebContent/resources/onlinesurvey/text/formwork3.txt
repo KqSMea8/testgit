@@ -1,0 +1,4 @@
+<div class="tip">请将输入的文字控制在200字以下：</div>
+		<div class="mui-input-row " style="margin: 0px 5px;min-height:50px;height:100%">
+			<textarea id="{index}_text" name="{index}_text" class="textpart" rows="5" placeholder="在此输入内容" style="border:1px solid rgba(0,0,0,0.2); border-radius: 3px"></textarea>
+		</div>

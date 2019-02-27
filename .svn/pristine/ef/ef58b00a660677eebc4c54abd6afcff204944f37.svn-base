@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>使用帮助</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="{sysUrl}/resources/mailbox/css/mui.min.css">
+		<style>
+			html,body {
+				background-color: white;
+				width: 750px;
+			}
+			.mui-bar-nav~.mui-content{
+				padding: 0;
+			}
+			
+			.title{
+				margin: 20px 15px 7px;
+				color: #6d6d72;
+				font-size: 15px;
+			}
+			.mui-icon-left-nav:before{content:"\e471"; color: white;}
+			.mui-input-group .mui-button-row {height: auto;}
+			.mui-input-row label {width: 25%;   padding-right: 0px;}
+			.mui-input-row label~input{width: 75%;}
+		</style>
+	</head>
+	<body>
+	  <div class="mui-bar mui-bar-nav" style="width:750px; height:64px;padding-top:10px; background: white;">
+			<a class="mui-icon mui-pull-right" style="height: 44px;">
+			   <div style="background-color: #E6544C;width: 5px; height: 22px;"></div>
+			</a>
+			<h1 id="title" class="mui-title " style="color: black; font-size: 20px;right: 25px;text-align: right;">领导信箱</h1>
+	  </div>
+	  <div class="mui-content" style="padding-top: 64px;height:auto;background-color: white; padding-left: 30%;padding-right: 30%;min-height: 200px;">
+	  <img  src="{sysUrl}/resources/mailbox/images/500.png" style="max-width: 200%; vertical-align: bottom;margin-top: 60px;" >
+	  <p style="margin-top: 24px; font-size: 16px;text-align: center;color: #80848C;">服务器异常,请重新登录</p>
+	  </div>
+	  
+	  
+	</body>
+	<script src="{sysUrl}/resources/mailbox/js/mui.min.js"></script>
+	<script src="{sysUrl}/resources/mailbox/js/jquery-1.8.3.min.js"></script>
+	<script>
+		mui.init({
+			swipeBack:true //启用右滑关闭功能
+		});
+		
+	</script>
+</html>

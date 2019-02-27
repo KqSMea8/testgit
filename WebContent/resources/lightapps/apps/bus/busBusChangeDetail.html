@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>公交查询</title>
+		<script src="./source/js/mui.min.js"></script>
+		<link href="./source/css/mui.min.css" rel="stylesheet" />
+		<link href="./source/css/busBusChange.css" rel="stylesheet" />
+		<link href="./source/css/busBusChangeDetail.css" rel="stylesheet" />
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=xOWZlWcTZPK84VcK3Ixzqq9wQ6arTUry"></script>
+		<script type="text/javascript" charset="UTF-8">
+			mui.init();
+		</script>
+
+		<style type="text/css">
+			body,
+			html {
+				width: 100%;
+				height: 100%;
+				margin: 0;
+			}
+			
+			#changeDescription {
+				width: 100%;
+				font-size: 16px;
+				color: #333333;
+				margin-left: 5%;
+				margin-top: 10px;
+				width: 90%;
+			}
+			
+			tr {
+				height: 50px;
+			}
+			
+			header #rightBtn {
+				margin-right: 50px;
+			}
+		</style>
+	</head>
+	<div style="display: block;" id="header">
+		<header class="mui-bar mui-bar-nav" style="background-color: #007AFF;height:44px;font-family: '微软雅黑';">
+			<a class="mui-action-back mui-icon  mui-pull-left" style="color: #FFFFFF;background-image: url(../../bus/source/images/topback.png);background-size: 20px 20px;background-repeat: no-repeat;margin-top: 10px;margin-left: 10px"></a>
+			<h1 class="mui-title" style="color: #FFFFFF;">方案详情</h1>
+			<!--<button class="mui-btn-danger" style="height: 30px;float: right;margin-top: 8px;" onclick="GoToMap('换乘');return false" />地图</button>-->
+			<img src="./source/images/bus_map_top.png" style="width:25px;height:25px;float: right;margin-top: 8px;" onclick="GoToMap('换乘');return false" />
+		</header>
+	</div>
+	<body>
+
+		<div class="mui-content">
+			<div id="paddingtop" class="mui-scroll-wrapper" style="min-height: 100%;background-color: #FFFFFF;padding-top: 44px;">
+				<div class="mui-scroll">
+					<ul class="mui-table-view" style="background-color: #FFFFFF;">
+						<li class="mui-media mui-table-view-cell" style="height:90px;width: 100%;">
+							<a href="javascript:;">
+								<div class="mui-media-body" style="font-size: 16px;color: #333333;margin-top: 0px;">
+									<img class="mui-pull-left leftImage" src="./source/images/bus_bus.png">
+									<div id="changeLine">
+									</div>
+								</div>
+								<div style="float: left;padding-top: 21px;"><span style="color: black;font-size: 14px;padding-left: 5px;">畅通</span><span class='mui-ellipsis' id="changeDetail" style="font-size: 14px;color: #999999;padding-left: 10px;">{{item.changeDetail}}</span></div>
+							</a>
+						</li>
+					</ul>
+					<div id="l-map"></div>
+					<div id="changeDescription" style="font-size: 14px;"> </div>
+				</div>
+			</div>
+		</div>
+
+		<script>
+			var href = location.href;
+			//依据href获得传来的参数截取传来的站点名称
+			var pointLng = href.split("myPointLng=")[1];
+			pointLng = pointLng.split("&")[0];
+			var pointLat = href.split("myPointLat=")[1];
+			pointLat = pointLat.split("&")[0];
+			var city = href.split("city=")[1];
+			city = city.split("&")[0];
+			city = decodeURI(city);
+			var index = href.split("index=")[1];
+			index = index.split("&")[0];
+			var startName = href.split("startName=")[1];
+			startName = startName.split("&")[0];
+			startName = decodeURI(startName);
+			var endName = href.split("endName=")[1];
+			endName = endName.split("&")[0];
+			endName = decodeURI(endName);
+			//获取city,index,startName,endName参数是为了点击地图是带到地图界面，进而进行地图检索并显示
+			var changeLine = href.split("changeLine=")[1];
+			changeLine = changeLine.split("&")[0];
+			changeLine = decodeURI(changeLine);
+			var changeDetail = href.split("changeDetail=")[1].split("&")[0];
+			changeDetail = decodeURI(changeDetail);
+			var changeDescription = href.split("changeDescription=")[1];
+			changeDescription = decodeURI(changeDescription);
+			document.getElementById("changeLine").innerHTML = changeLine;
+			document.getElementById("changeDetail").innerHTML = changeDetail;
+			document.getElementById("changeDescription").innerHTML = changeDescription;
+		</script>
+		<!--不知道为什么必须要初始化一个地图对象才可以显示description的样式-->
+		<script type="text/javascript">
+			// 百度地图API功能
+			var map = new BMap.Map("l-map");
+			map.centerAndZoom(new BMap.Point(116.404, 39.915), 10);
+			map.enableScrollWheelZoom();
+		</script>
+		<script src="./source/js/util.js"></script>
+		<script src="./service/busBusChange.service.js"></script>
+		<script src="./service/busBusChangeDetail.service.js"></script>
+		<script src="./controller/busBusChangeDetail.controller.js"></script>
+	</body>
+
+</html>

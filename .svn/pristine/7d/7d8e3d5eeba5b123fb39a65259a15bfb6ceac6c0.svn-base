@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>公交查询</title>
+		<script src="./source/js/mui.min.js"></script>
+		<!-- <script src="../../../js/mui.min.js"></script> -->
+		<link href="./source/css/mui.min.css" rel="stylesheet" />
+		<!--引用自定义的css-->
+		<!--<link href="../source/css/busMap.css" rel="stylesheet" />-->
+		<!--引用百度地图js-->
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=xOWZlWcTZPK84VcK3Ixzqq9wQ6arTUry"></script>
+		<script type="text/javascript" charset="UTF-8">
+			mui.init();
+		</script>
+	</head>
+	<div style="display: none;" id="header">
+		<header class="mui-bar mui-bar-nav" style="background-color: #007AFF;font-family: '微软雅黑';">
+			<a class="mui-action-back mui-icon  mui-pull-left" style="color: #FFFFFF;background-image: url(../../bus/source/images/topback.png);background-size: 20px 20px;background-repeat: no-repeat;margin-top: 10px;margin-left: 10px"></a>
+			<h1 class="mui-title" id="titleName" style="color: #FFFFFF;"> </h1>
+			<!--<button id="navigate" type="button" >导航</button>-->
+		</header>
+	</div>
+
+	<body>
+
+		<!--<div class="mui-content">-->
+		<div id="allmap" class="mui-content" style="padding-top: 44px;min-height: 1000px;"></div>
+		<!--</div>-->
+
+		<script>
+			var href = location.href;
+			//依据href获得传来的参数截取传来的站点名称
+			var startName = href.split("startName=")[1].split("&")[0];
+			startName = decodeURI(startName);
+			var endName = href.split("endName=")[1].split("&")[0];
+			endName = decodeURI(endName);
+			var type = href.split("type=")[1].split("&")[0];
+			type = decodeURI(type);
+			var city = href.split("city=")[1].split("&")[0];
+			city = decodeURI(city);
+
+			var station = href.split("station=")[1].split("&")[0];
+			station = decodeURI(station);
+			var pointLat = href.split("pointLat=")[1].split("&")[0];
+			var pointLng = href.split("pointLng=")[1];
+			if(type == "地图") { //由地图跳转
+				document.getElementById("titleName").innerHTML = station + "地图";
+			} else if(type == "街景") { //由街景跳转
+				document.getElementById("titleName").innerHTML = station + "街景";
+			} else if(type == "步行") {
+				document.getElementById("titleName").innerHTML = "步行方案";
+			} else if(type == "驾车") {
+				document.getElementById("titleName").innerHTML = "驾车方案";
+			} else if(type == "线路") {
+				document.getElementById("titleName").innerHTML = startName + "地图";
+			} else if(type == "换乘") {
+				document.getElementById("titleName").innerHTML = "换乘线路";
+			}
+			document.getElementById("allmap").style.minHeight = document.body.scrollHeight+"px";
+		</script>
+		<script src="./source/js/util.js"></script>
+		<script src="./controller/busMap.controller.js"></script>
+	</body>
+</html>
+
+<script type="text/javascript">
+</script>

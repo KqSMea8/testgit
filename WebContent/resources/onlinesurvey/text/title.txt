@@ -1,0 +1,14 @@
+<li class="mui-table-view-cell">
+<a onclick="{params}" style="margin-right:-15px;padding-bottom:5px;padding-right:15px">
+		<span class="mui-ellipsis-2" style="line-height: 20px;height:37px">{title}</span>
+		<span class="mui-pull-right tip" style="color:{color}">
+			{isend}
+		 </span>
+ 		<p>
+			<span>发布日期:&nbsp;&nbsp;{createtime}</span><span class="mui-pull-right " style="width: 72px;height:14px">截止日期:&nbsp;&nbsp;{endtime}</span>						
+		</p>
+</a>
+<li>
+
+
+

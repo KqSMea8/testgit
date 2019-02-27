@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Hanweb</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">	
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+<link href="css/style.css" rel='stylesheet' type='text/css' />
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Play:400,700' rel='stylesheet' type='text/css'>
+<style type="text/css">
+	.block-blue {
+	background: #3b9ac6;
+	color: #fff;
+}
+   .download-main {
+	height: 50%;
+	background-repeat: no-repeat;
+	background-position: center 0;
+	background-size: auto 100%;
+}
+   .qrcode {
+   	margin: auto;
+	padding-top: 40px;
+	padding-bottom: 40px;
+	width: 180px;
+	text-align: center;
+}
+
+ .download-tips {
+	text-align: center;
+	opacity: .5;
+	filter: alpha(opacity=50);
+}
+.wrapper{position:relative;z-index:1;margin:0 auto;*zoom:1;overflow:hidden;}
+.wrapper.overflow{overflow:visible;}
+.wrapper:after{display:block;height:0;clear:both;content:" ";}
+
+</style>
+<script type="text/javascript" src="js/jquery-1.10.2.min.js">
+</script>  
+<!---- start-smoth-scrolling---->
+<script type="text/javascript" src="js/move-top.js"></script>
+<script type="text/javascript" src="js/easing.js"></script>
+<script type="text/javascript">
+			jQuery(document).ready(function($) {
+				$(".scroll").click(function(event){		
+					event.preventDefault();
+					$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+				});
+			});
+		</script>
+
+<!---- start-smoth-scrolling---->
+<!---image-carsuals---->
+	    <link href="css/owl.carousel.css" rel="stylesheet">
+	    <link href="css/owl.theme.css" rel="stylesheet">
+   		<script src="js/owl.carousel.js"></script>
+   		<script>
+	    $(document).ready(function() {
+	      $("#owl-demo").owlCarousel({
+	      	navigation: true,
+		    navigationText: [
+		      "<i class='icon-chevron-left icon-white'></i>",
+		      "<i class='icon-chevron-right icon-white'></i>"
+		      ],
+	        items :3,
+	        slideSpeed :100,
+	        lazyLoad : true,
+	        autoPlay : true,
+	      });
+	    });
+	    </script>
+   		<!---//End-carsuals---->
+
+</head>
+<body>
+	<div class="banner" id="home">
+		<div class="container">
+			<div class="header">
+				<div class="header-left">
+					<a href="index.html"><img src="images/logo.png" alt=""></a>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+			<div class="banner-bottom">
+				<div class="col-md-6">
+					<div class="banner-bottom-left" style="padding-top: 40px;">
+						<img style="width:100%;"src="images/phone.png" alt="">
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="banner-bottom-right" style="padding-bottom:40px;">
+						<h1>大汉科技&移动互联</h1>
+						<h3>微门户</h3>
+						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;微门户是政府、媒体、企业等门户网站在手机和手持终端上的应用，通过手机和智能终端等新载体为公众提供更好、更快、更炫的信息服务</p>
+						<ul style="width: 330px;">
+							<li><a class="scroll" href="#download">客户端下载区</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+		</div>
+	</div>
+				<div id="download" class="download-main block-blue">
+				<div class="wrapper">
+					<div class="qrcode" style="font-size: 12px;">
+						<img src="images/qrcode.png" widht="180px;" height="180px;" alt="用手机扫描二维码下载" style="padding-bottom: 15px;">
+						用手机扫描二维码下载
+					</div>
+				</div>
+				<div style="clear: both;"></div>
+		</div>
+
+	<div class="footer">
+		<div class="container">
+			<div class="footer-main">
+				<a href="#home" class="scroll"><img src="images/top-arw.png" alt=""></a>
+				<div style="margin: 20px;"></div>
+				<h3>Go to Top</h3>
+				<p>&copy; 2015 Design by &nbsp;<a href="http://www.hanweb.com">大汉科技</a></p>
+			</div>
+		</div>
+	</div>
+	<!--footer-ends-Here-->
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>办件内容页</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="{sysUrl}/resources/mailbox/css/mui.min.css">
+		<style>
+			html,body {
+				background-color: #f2f2f2;
+				font-size: 16px;
+			}
+			
+			.mui-bar-nav~.mui-content{
+				padding: 0;
+			}
+			.content{
+			    color: #80848C;
+			}
+			.title{
+				margin: 20px 15px 7px;
+				color: #6d6d72;
+				font-size: 15px;
+			}
+			.mui-content>.mui-table-view:first-child {margin-top: 0px;}		
+			.mui-icon-left-nav:before{content:"\e471"; color: white;}
+			.mui-radio input[type=radio]:before {content: "\e411";}
+			.mui-checkbox input[type=checkbox]:checked:before, .mui-radio input[type=radio]:checked:before {color: #cccccc;}
+		</style>
+	</head>
+	<body>
+	  <div class="mui-bar mui-bar-nav" style="width:750px; height:64px;padding-top:10px; background: white;">
+	        <a class="mui-action-back mui-icon mui-pull-left" style="height: 44px; padding-top: 0px;">
+			   <img  src="{sysUrl}/resources/mailbox/images/back.png" style="max-width: 50%;">
+			</a>
+			<a class="mui-icon mui-pull-right" style="height: 44px;">
+			   <div style="background-color: #E6544C;width: 5px; height: 22px;"></div>
+			</a>
+			<h1 id="title" class="mui-title " style="color: black; font-size: 20px;right: 25px;text-align: right;">办件内容</h1>
+	  </div> 
+	  <div class="mui-content" style="padding-top: 64px;height:auto; line-height: 30px;">
+	       <ul class="mui-table-view">
+	           <li class="mui-table-view-cell">
+					<span style="right: 20px;">标　　题：</span>
+					<span class="content">{title}</span>
+			   </li>
+	           <li class="mui-table-view-cell">
+	                <span style="right: 20px;">内　　容：</span>
+					<span class="content">{titlecontent}</span>
+			   </li>
+			   <li class="mui-table-view-cell">
+					<span style="right: 20px;">办理状态：</span>
+					<span class="content">{state}</span>
+			   </li>
+			   <!--banjiancontent  start-->
+			   <!--banjiancontent  end-->
+	       </ul>
+	  </div>
+	 
+	  
+	</body>
+	<script src="{sysUrl}/resources/mailbox/js/mui.min.js"></script>
+	<script>
+		mui.init({
+			swipeBack:true //启用右滑关闭功能
+		});
+	</script>
+</html>

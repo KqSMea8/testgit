@@ -1,0 +1,6 @@
+<li class="mui-table-view-cell">  
+	<a onclick="content({params})" class="mui-navigate-right" style="">
+			
+		<div class="mui-media-body">{title}</div>
+	</a>
+</li>

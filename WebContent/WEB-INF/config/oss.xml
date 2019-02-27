@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aliyun-oss>
+    <endpoint></endpoint>
+    <accessKeyId></accessKeyId>
+    <secretAccessKey></secretAccessKey>
+    <baseurl></baseurl>
+    <buckets>
+        <bucket name="jcms">
+            <rules>
+                <rule>web\d+/info/</rule>
+                <rule>resources/jcms/syssettings/design/xml/</rule>
+                <rule>WEB-INF/config/sysconfig.xml</rule>
+            </rules>
+        </bucket>
+        <bucket name="jcmspub">
+            <rules>
+                <rule>web\d+/site/</rule>
+                <rule>web\d+/modal/</rule>
+                <rule>web\d+/modalobject/</rule>
+            </rules>
+        </bucket>
+    </buckets>
+    <hadoopUrl>
+	hdfs://10.19.182.8:8020/
+	</hadoopUrl>
+	<hadoopUrlFollow>
+	user/test/test1/
+	</hadoopUrlFollow>
+	<hadoopGetUrl>
+	http://10.19.182.8:50070/
+	</hadoopGetUrl>
+</aliyun-oss>

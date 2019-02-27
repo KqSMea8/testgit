@@ -1,0 +1,99 @@
+<ehcache name="jmp" updateCheck="false" dynamicConfig="false">
+
+    <diskStore path="java.io.tmpdir"/>
+	
+	<cacheManagerEventListenerFactory class="" properties=""/>
+
+    <!--Default Cache configuration. These will applied to caches programmatically created through
+        the CacheManager.
+
+        The following attributes are required for defaultCache:
+
+        maxInMemory       - Sets the maximum number of objects that will be created in memory
+        eternal           - Sets whether elements are eternal. If eternal,  timeouts are ignored and the element
+                            is never expired.
+        timeToIdleSeconds - Sets the time to idle for an element before it expires. Is only used
+                            if the element is not eternal. Idle time is now - last accessed time
+        timeToLiveSeconds - Sets the time to live for an element before it expires. Is only used
+                            if the element is not eternal. TTL is now - creation time
+        overflowToDisk    - Sets whether elements can overflow to disk when the in-memory cache
+                            has reached the maxInMemory limit.
+
+        -->
+    <defaultCache
+        maxElementsInMemory="1000" eternal="false"  timeToIdleSeconds="60" timeToLiveSeconds="120"
+        overflowToDisk="true">
+        <!--  cacheEventListenerFactory class="net.oschina.j2cache.ehcache.EhCacheEventListenerFactory"/-->
+    </defaultCache>
+
+    <!--Predefined caches.  Add your cache configuration settings here.
+        If you do not have a configuration for your cache a WARNING will be issued when the
+        CacheManager starts
+
+        The following attributes are required for defaultCache:
+
+        name              - Sets the name of the cache. This is used to identify the cache. It must be unique.
+        maxInMemory       - Sets the maximum number of objects that will be created in memory
+        eternal           - Sets whether elements are eternal. If eternal,  timeouts are ignored and the element
+                            is never expired.
+        timeToIdleSeconds - Sets the time to idle for an element before it expires. Is only used
+                            if the element is not eternal. Idle time is now - last accessed time
+        timeToLiveSeconds - Sets the time to live for an element before it expires. Is only used
+                            if the element is not eternal. TTL is now - creation time
+        overflowToDisk    - Sets whether elements can overflow to disk when the in-memory cache
+                            has reached the maxInMemory limit.
+
+        -->
+
+    <cache name="session" maxElementsInMemory="5000" eternal="false" timeToIdleSeconds="1800"
+        timeToLiveSeconds="1800" overflowToDisk="false" />
+        
+     <!-- 接口缓存配置 -->
+	 <cache name="jmpinterface" maxElementsInMemory="10000" eternal="false" overflowToDisk="false"
+        timeToIdleSeconds="60" timeToLiveSeconds="60"
+        diskPersistent="false" diskExpiryThreadIntervalSeconds="120" memoryStoreEvictionPolicy="LRU"/> 
+        
+     <!-- 网站缓存配置 -->
+     <cache name="jmpsite" maxElementsInMemory="10000" eternal="false" overflowToDisk="false"
+        timeToIdleSeconds="86400" timeToLiveSeconds="86400"
+        diskPersistent="false" diskExpiryThreadIntervalSeconds="120" memoryStoreEvictionPolicy="LRU"/> 
+        
+     <!-- 栏目缓存配置 -->
+     <cache name="jmpcol" maxElementsInMemory="10000" eternal="false" overflowToDisk="false"
+        timeToIdleSeconds="86400" timeToLiveSeconds="86400"
+        diskPersistent="false" diskExpiryThreadIntervalSeconds="120" memoryStoreEvictionPolicy="LRU"/>
+        
+     <!-- 信息缓存配置 -->
+     <cache name="jmpinfo" maxElementsInMemory="10000" eternal="false" overflowToDisk="false"
+        timeToIdleSeconds="259200" timeToLiveSeconds="259200"
+        diskPersistent="false" diskExpiryThreadIntervalSeconds="120" memoryStoreEvictionPolicy="LRU"/>
+    
+    <!-- 接口安全控制缓存配置 -->
+    <cache name="AccessControl" maxElementsInMemory="10000" eternal="false" overflowToDisk="false"
+        timeToIdleSeconds="3600" timeToLiveSeconds="3600"
+        diskPersistent="false" diskExpiryThreadIntervalSeconds="120" memoryStoreEvictionPolicy="LRU"/>
+        
+    <!-- 天气缓存配置 -->
+    <cache name="weather" maxElementsInMemory="10000" eternal="false" overflowToDisk="false"
+        timeToIdleSeconds="3600" timeToLiveSeconds="3600"
+        diskPersistent="false" diskExpiryThreadIntervalSeconds="120" memoryStoreEvictionPolicy="LRU"/>
+    
+     <!-- 商城缓存配置 -->
+     <cache name="jmpshop" maxElementsInMemory="10000" eternal="false" overflowToDisk="false"
+        timeToIdleSeconds="259200" timeToLiveSeconds="259200"
+        diskPersistent="false" diskExpiryThreadIntervalSeconds="120" memoryStoreEvictionPolicy="LRU"/>
+        
+     <!-- 领导信箱缓存配置 -->
+     <cache name="mailbox" maxElementsInMemory="10000" eternal="false" overflowToDisk="false"
+        timeToIdleSeconds="3600" timeToLiveSeconds="3600"
+        diskPersistent="false" diskExpiryThreadIntervalSeconds="120" memoryStoreEvictionPolicy="LRU"/>
+      
+      <!-- 网上调查缓存配置 -->
+     <cache name="onlinesurvey" maxElementsInMemory="10000" eternal="false" overflowToDisk="false"
+        timeToIdleSeconds="259200" timeToLiveSeconds="259200"
+        diskPersistent="false" diskExpiryThreadIntervalSeconds="120" memoryStoreEvictionPolicy="LRU"/>
+      <!-- 意见征集缓存配置 -->
+      <cache name="solicitopinion" maxElementsInMemory="10000" eternal="false" overflowToDisk="false"
+        timeToIdleSeconds="259200" timeToLiveSeconds="259200"
+        diskPersistent="false" diskExpiryThreadIntervalSeconds="120" memoryStoreEvictionPolicy="LRU"/>
+</ehcache>

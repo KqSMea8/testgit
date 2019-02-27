@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>办件列表页</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+        
+		<link rel="stylesheet" href="{sysUrl}/resources/mailbox/css/mui.min.css">
+		<link rel="stylesheet" href="{sysUrl}/resources/mailbox/js/need/layer.css">
+		<style>
+		    a:link { text-decoration:none;color: #808080;}
+	    　　 a:active { text-decoration:none}
+	    　　 a:hover { text-decoration:none}
+	    　　 a:visited { text-decoration:none}		    
+			html,body {
+				background-color: #f2f2f2;
+				font-size:16px;
+			}
+			.mui-bar-nav~.mui-content{
+				padding: 0;
+			}
+			
+			.title{
+				margin: 20px 15px 7px;
+				color: #6d6d72;
+				font-size: 15px;
+			}
+			.mui-title{
+				font-size: 16px;
+			}
+			.mui-icon-left-nav:before{content:"\e471"; color: white;}
+			/*日期*/
+			p{
+			margin-top:20px;
+			height:30px;
+			color:#808080;
+			font-size: 12px;
+			}
+			.mui-table-view-cell:after{width:100%;left:0px;right:0px;}
+			.mui-table-view-chevron .mui-table-view-cell {
+			  padding-right: 15px;
+			}
+			mui-table-view-chevron .mui-table-view-cell>a:not(.mui-btn) {
+			  margin-right: 0px;
+			}
+		</style>
+	</head>
+	<body>
+	  <div class="mui-bar mui-bar-nav" style="width:750px; height:64px;padding-top:10px; background: white;">
+	        <input type="hidden" id="color" name="color" value="{color}"></input>
+	        <input type="hidden" id="sysid" name="sysid" value="{sysid}"></input>
+	        <input type="hidden" id="num" name="num" value="10"></input>
+	        <input type="hidden" id="pagenum" name="pagenum" value="2"></input>
+	        <input type="hidden" id="resourceid" name="resourceid" value="{resourceid}"></input>
+	        <input type="hidden" id="clienttype" name="clienttype" value="{clienttype}"></input>
+	        <a class="mui-action-back mui-icon mui-pull-left" style="height: 44px; padding-top: 0px;">
+			   <img  src="{sysUrl}/resources/mailbox/images/back.png" style="max-width: 50%;">
+			</a>
+			<a class="mui-icon mui-pull-right" style="height: 44px;">
+			   <div style="background-color: #E6544C;width: 5px; height: 22px;"></div>
+			</a>
+			<h1 id="title" class="mui-title " style="color: black; font-size: 20px;right: 25px;text-align: right;">我的办件</h1>
+	  </div>
+	  <!--下拉刷新容器-->
+		<div id="pullrefresh" class="mui-content mui-scroll-wrapper" style="margin-top: 64px;">
+			<div class="mui-scroll">
+				<!--数据列表-->
+				<ul class="mui-table-view mui-table-view-chevron">
+				 	<!--bjlist  start-->
+				 	<!--bjlist  end-->
+				</ul>
+			</div>
+		</div>
+	 
+	  
+	</body>
+	<script src="{sysUrl}/resources/mailbox/js/jquery-1.8.3.min.js"></script>
+	<script src="{sysUrl}/resources/mailbox/js/mui.min.js"></script>	
+	<script src="{sysUrl}/resources/mailbox/js/layer.m.js"></script>
+	<script>
+		mui.init({
+			pullRefresh: {
+				container: '#pullrefresh',
+				up: {
+					contentrefresh: '正在加载...',
+					contentnomore:'没有更多数据了',
+					callback: pullupRefresh
+				}
+			}
+		});
+
+		/**
+		 * 上拉加载具体业务实现
+		 */
+		function pullupRefresh() { 
+			
+			setTimeout(function() {
+				var number = $("#num").val();
+                var sysid = $("#sysid").val();
+                var count = $("#pagenum").val();
+                var resourceid = $("#resourceid").val();
+                var clienttype = $("#clienttype").val();     
+				$.ajax({
+					type : "GET",
+					url :'{sysUrl}/interfaces/pullup.do',
+					data : "num=" + number + "&pagenum=" +count + "&resourceid=" + resourceid + "&clienttype=" + clienttype,
+					success : function(msg) {
+						
+						var result = msg;
+						var arrays=result.split("$");
+						mui('#pullrefresh').pullRefresh().endPullupToRefresh((result == '')); //参数为true代表没有更多数据了。
+						if(result != ''){
+							count++;
+							$("#pagenum").val(count);
+							var table = document.body.querySelector('.mui-table-view');
+							var cells = document.body.querySelectorAll('.mui-table-view-cell');
+							var j=0;
+							for (var i = cells.length, len = i + arrays.length; i < len; i++) {
+								var li = document.createElement('li');
+								li.className = 'mui-table-view-cell';
+								li.innerHTML = arrays[j];
+								table.appendChild(li);
+								j=j+1;
+							}
+					    }else{
+					    	
+					       	$(".mui-pull-caption").css("display", "none");
+					    	layer.open({
+				        	    content: '没有更多内容了',
+				        	    style: 'background-color:#545454; color:#fff; border:none;top:-100px;text-align:center;',
+				       	        time: 2
+					    	});
+					    	mui('#pullrefresh').pullRefresh().endPullupToRefresh((true));
+							mui('#pullrefresh').pullRefresh().refresh(true);
+							return;
+							    	
+							    	
+						}
+						
+					}
+				});
+				
+				
+			}, 1000);
+		}
+
+	function showContent(transactid) {
+		var color = $("#color").val();
+		var sysid = $("#sysid").val();
+		var resourceid = $("#resourceid").val();
+		var clienttype = $("#clienttype").val();
+		var id = transactid;
+		window.location.href="{sysUrl}/interfaces/mailbox/content.do?id=" + id + "&color="+color+ "&sysid="+sysid+ "&resourceid=" + resourceid + "&clienttype=" + clienttype;
+	}
+</script>
+</html>

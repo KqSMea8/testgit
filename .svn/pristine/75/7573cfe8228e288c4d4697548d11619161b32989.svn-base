@@ -1,0 +1,8 @@
+<li class="mui-table-view-cell">
+	<a class='' onclick="showContent({id})" style="padding:inherit;margin-right: -15px;padding-bottom: 5px;">
+		<span class="mui-ellipsis-2" style="line-height: 20px;height:37px">{title}</span>
+		<p style="height: 12px;">
+			<span class="mui-pull-left" style="">{date}</span><span class="mui-pull-right" style="">办理状态：{state}</span>
+		</p>
+	</a>
+</li>

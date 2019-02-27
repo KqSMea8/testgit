@@ -1,0 +1,7 @@
+<div style="background-color:white;margin-top:10px;padding-top:10px;">	
+	   <div class="mui-input-row" style="padding-bottom:0px;height:100%;margin-left:15px;">
+			<div style="line-height: 30px;width:100%;">{title}</div>
+	   </div>
+	  {body}
+</div>	
+			

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>写信</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="{sysUrl}/resources/mailbox/css/mui.min.css">
+		<link rel="stylesheet" href="{sysUrl}/resources/mailbox/js/need/layer.css">
+		<style>
+			html,body {
+				background-color: #f2f2f2;
+				font-size: 16px;
+			}
+			.mui-bar-nav~.mui-content{
+				padding: 0;
+			}
+			
+			.title{
+				margin: 20px 15px 7px;
+				color: #6d6d72;
+				font-size: 15px;
+			}
+			.mui-input-row label {width: 25%;   padding-right: 0px;}
+			.mui-input-row label~input{width: 75%;}
+			.mui-icon-left-nav:before{content:"\e471"; color: white;}
+			.mui-radio input[type=radio]:before {content: "\e411"; font-size: 20px;}
+			
+			.mui-checkbox input[type=checkbox]:checked:before, .mui-radio input[type=radio]:checked:before {color: #cccccc; font-size: 20px;}
+			.mui-checkbox input[type=checkbox], .mui-radio input[type=radio] {
+			  top: 8px;
+			  width: 20px;
+			  height: 20px;
+			}
+			.mui-input-group .mui-input-row:after {left: 0px;}
+			.mui-icon-right-nav:before {
+			  content: "\e472";
+			  color: white;
+			  font-size: 44px;
+			}
+			
+		</style>
+	</head>
+	<body>
+	  <div class="mui-bar mui-bar-nav" style="width:750px; height:64px;padding-top:10px; background: white;">
+	        <a class="mui-action-back mui-icon mui-pull-left" style="height: 44px; padding-top: 0px;">
+			   <img  src="{sysUrl}/resources/mailbox/images/back.png" style="max-width: 50%;">
+			</a>
+			<a class="mui-icon mui-pull-right" style="height: 44px;">
+			   <div style="background-color: #E6544C;width: 5px; height: 22px;"></div>
+			</a>
+			<h1 id="title" class="mui-title " style="color: black; font-size: 20px;right: 25px;text-align: right;">我要写信</h1>
+	  </div>
+	  <div class="mui-content" style="padding-top: 64px;height:100px;">
+	      <form class="mui-input-group">
+	                <input type="hidden" id="color" name="color" value="{color}"></input>
+	                <input type="hidden" id="sysid" name="sysid" value="{sysid}"></input>
+	                <input type="hidden" id="resourceid" name=resourceid value="{resourceid}"></input>
+	                <input type="hidden" id="clienttype" name="clienttype" value="{clienttype}"></input>
+	                <input type="hidden" id="uuid" name="uuid" value="{uuid}"></input>
+	                <input type="hidden" id="groupid" name="groupid" value="{groupid}"></input>
+	                <input type="hidden" id="userid" name="userid" value="{userid}"></input>
+	                <input type="hidden" id="filename" name="filename" value=""></input>
+	                <div class="mui-input-row mui-radio mui-left" style="width: 50%;float: left;">
+						<label style="padding-left: 30%;width: 70%;">公开</label>
+						<input id="ispublic1" name="ispublic" type="radio" value="1">
+					</div>
+					<div class="mui-input-row mui-radio mui-left" style="width: 50%;clear: none;">
+						<label style="padding-left: 30%;width: 70%;">不公开</label>
+						<input id="ispublic2" name="ispublic" type="radio" value="0" checked>
+					</div>
+					<div class="mui-input-row">
+						<label>标题：</label>
+						<input type="text" id="title1" name="title1" value="" placeholder="输入标题" style="color: #80848C;">
+					</div>
+					<div class="mui-input-row">
+						<label>姓名：</label>
+						<input type="text" id="name" name="name" value="{name}" placeholder="输入姓名" style="color: #80848C;">
+					</div>
+					<div class="mui-input-row">
+						<label>手机：</label>
+						<input type="text" id="mobile" name="mobile" value="{mobile}" placeholder="输入手机" style="color: #80848C;">
+					</div>
+					<div class="mui-input-row">
+						<label>邮箱：</label>
+						<input type="text" id="mail" name="mail" value="{mail}" placeholder="输入邮箱" style="color: #80848C;">
+					</div>
+					
+		  </form>
+		  <div class="mui-input-row" style="margin: 5px 5px; margin-bottom: 0px;">
+					<textarea id="textarea" style="margin-bottom: 0px;color: #80848C;"  rows="5" placeholder="在此输入内容"></textarea>
+		  </div>
+		  <div class="mui-input-row" style=" text-align: center; background-color: white; height: 40px;padding:5px 10px; border-bottom-color: black; border-bottom-width: 1px;">
+		    <table style="text-align: center;width: 90%;font-size: 16px;line-height: 20px;vertical-align: middle;"  border="0">
+	          <tr>
+	               <td width="30%" style="padding-top: 2px;">验证码：</td>
+	               <td width="33%" style="padding-top: 5px;"><input type="text" id="code" name="code" style="padding: 0 0 ; height: 20px;margin-bottom: 0px;padding-left: 5px; color: #80848C;"> </td>
+	               <td  style="text-align: left;vertical-align: middle; padding-left: 10px;">
+	               
+	               <img id="verifyImg" src="{sysUrl}interfaces/mailbox/verifyCode.do?width=70&height=30&random=1441616395832&uuid={uuid}" onclick="this.src='{sysUrl}interfaces/mailbox/verifyCode.do?width=70&height=30&uuid={uuid}&random='+ Math.random();" style="cursor:pointer;vertical-align: middle;"  width="60"  height="20" />
+	               
+	                </td>
+	          </tr>
+	        </table>
+	        
+	        
+		  </div>
+		  
+		  <div class="mui-button-row" style="margin-top:1px; background-color: white;padding-top: 20px;" >
+				<button type="button" class="mui-btn mui-btn-danger" style="width: 80%;background: #{color};margin-top: 0px;margin-bottom: 20px;"  onclick=" check()">提&nbsp;&nbsp;交</button>
+		  </div>
+	  </div>
+	  
+	</body>
+	<script src="{sysUrl}/resources/mailbox/js/mui.min.js"></script>
+	<script src="{sysUrl}/resources/mailbox/js/jquery-1.8.3.min.js"></script>
+	<script src="{sysUrl}/resources/mailbox/js/layer.m.js"></script>
+	<script>
+
+		mui.init({
+			swipeBack:true //启用右滑关闭功能
+		});
+	    function check() {
+		      if($("#title1").val()==''){
+		    	  layer.open({
+		        	    content: '请输入标题',
+		        	    style: 'background-color:#545454; color:#fff; border:none;top:-100px;text-align: center;',
+		        	    time: 3
+		        	});
+		            return false;
+		       }
+		      if($("#name").val()==''){
+		    	  layer.open({
+		        	    content: '请输入姓名',
+		        	    style: 'background-color:#545454; color:#fff; border:none;top:-100px;text-align: center;',
+		        	    time: 3
+		        	});
+		            return false;
+		       }else{
+			       var name = $("#name").val();
+		    	   var reslut = checkUser(name);
+		    	   if(reslut != true){
+						  return false;
+				   }
+			   }
+		      if($("#textarea").val() == ''){
+		    	  layer.open({
+		        	    content: '请填写内容',
+		        	    style: 'background-color:#545454; color:#fff; border:none;top:-100px;text-align: center;',
+		        	    time: 3
+		        	});
+		    	  return false;
+			   }	
+		      if($("#mobile").val() == ''){
+		    	  layer.open({
+		        	    content: '请填写手机',
+		        	    style: 'background-color:#545454; color:#fff; border:none;top:-100px;text-align: center;',
+		        	    time: 3
+		        	});
+		    	  return false;
+			   }else{
+				   var mobile = $("#mobile").val();
+				   var reslut = checkMobile(mobile);
+				   if(reslut != true){
+						  return false;
+				   }
+			   }
+		      if($("#mail").val() == ''){
+		    	  layer.open({
+		        	    content: '请填写邮箱',
+		        	    style: 'background-color:#545454; color:#fff; border:none;top:-100px;text-align: center;',
+		        	    time: 3
+		        	});
+		    	  return false;
+			   }else{
+				  var reslut =  checkEmail($("#mail").val());
+				  if(reslut != true){
+					  return false;
+				  }
+			   }
+
+
+
+		      var code = $("#code").val();
+		      var resourceid = $("#resourceid").val();
+              var uuid = $("#uuid").val();
+              if(code == ''){
+                  layer.open({
+		        	    content: '请输入验证码',
+		        	    style: 'background-color:#545454; color:#fff; border:none;top:-100px;text-align: center;',
+		        	    time: 3
+		        	});
+                  return false;
+              }
+              $.ajax({
+		  			type : "GET",
+		  			url :'checkcode.do',
+		  			data :"code=" + code +"&uuid=" + uuid,
+		  			success :function(msg) {
+			  		    if(msg == 'true'){ 
+				  		   var ispublic = $('input:radio:checked').val(); 
+			               var title1 = $("#title1").val();
+			               var name = $("#name").val();
+			               var textarea = $("#textarea").val();
+			               var mobile = $("#mobile").val();
+			               var mail = $("#mail").val();
+			               var color = $("#color").val();
+			               var code = $("#code").val();
+						   var sysid = $("#sysid").val();
+						   var filename = $("#filename").val();
+						   var groupid = $("#groupid").val();
+						   var uuid = $("#uuid").val(); 
+						   var userid = $("#userid").val(); 
+						   var clienttype = $("#clienttype").val();
+		            	   $.ajax({
+					  			type : "GET",
+					  			url :'submitmail.do',
+					  			data :"ispublic=" 
+				  				     + ispublic + "&title="+title1+ "&name="+name+ "&content="+textarea +"&sysid="+sysid + "&color=" + color
+				  				     +"&mobile="+mobile+"&email="+mail+"&code="+code+"&groupid="+groupid+"&uuid="+uuid +"&userid=" + userid + "&resourceid=" + resourceid + "&clienttype=" + clienttype,
+					  			success : function(msg) {
+						  			
+					  				if(msg == 'success'){
+	
+					  					window.location.href="{sysUrl}/interfaces/mailbox/col/success.do?color="+color +"&uuid=" + uuid +"&resourceid="+resourceid + "&groupid="+groupid + "&sysid="+sysid + "&clienttype=" + clienttype;
+					  					
+						  			}else if(msg == 'fail'){
+						  				layer.open({
+							        	    content: '提交失败',
+							        	    style: 'background-color:#545454; color:#fff; border:none;top:-100px;text-align: center;',
+							        	    time: 3
+							        	});
+						  				return false;
+							  		}else if(msg == 'connect error'){
+							  			window.location.href="{sysUrl}/interfaces/mailbox/col/error.do?color=" + color + "&resourceid=" + resourceid + "&clienttype=" + clienttype;
+								  	}
+					  				
+					  			}
+					  		});  
+				  		}else if(msg == 'false'){
+				  			layer.open({
+				        	    content: '验证码错误,点击图片重新获取',
+				        	    style: 'background-color:#545454; color:#fff; border:none;top:-100px;',
+				        	    time: 3
+				        	});
+				  			$("#code").val('');
+				  			return false;
+					  	}else{
+					  		window.location.href="{sysUrl}/interfaces/mailbox/col/error.do?color=" + color + "&resourceid=" + resourceid + "&clienttype=" + clienttype;
+						}
+			  			
+		  			}
+              });
+	         }
+	         
+          function checkwritecode(){
+             
+          }
+
+          function checkUser(str){
+             var re = /^(?!_)(?!.*?_$)[a-zA-Z0-9_\u4e00-\u9fa5]+$/;
+             if(re.test(str)){
+            	 return true;
+             }else{
+            	 layer.open({
+		        	    content: '用户名输入格式错误',
+		        	    style: 'background-color:#545454; color:#fff; border:none;top:-100px;',
+		        	    time: 3
+		        	});
+            	 return false;
+             }          
+         }
+
+          function checkMobile(str) {
+             var re = /^(13|15|18|14|17)[0-9]{9}$/	;
+             if (re.test(str)) {
+            	 return true;
+             } else {
+            	 layer.open({
+		        	    content: '手机号码输入格式错误',
+		        	    style: 'background-color:#545454; color:#fff; border:none;top:-100px;',
+		        	    time: 3
+		        	});
+            	 return false;
+             }
+          }
+
+          function checkEmail(str){
+             var re =  /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
+             if(re.test(str)){
+            	 return true;
+             }else{
+            	 layer.open({
+		        	    content: '邮箱输入格式错误',
+		        	    style: 'background-color:#545454; color:#fff; border:none;top:-100px;',
+		        	    time: 3
+		        	});
+            	 return false;
+             }
+         }
+	</script>
+</html>

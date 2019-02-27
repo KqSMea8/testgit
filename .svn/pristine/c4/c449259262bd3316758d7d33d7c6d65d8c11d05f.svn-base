@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root> 
+	<database>
+		 <ip>127.0.0.1</ip>
+		 <port>3306</port>
+		 <dataname>jmp315</dataname>
+		 <username>root</username>
+		 <password>root</password>
+	</database> 
+</root>

@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta charset="UTF-8">
+    <title>大汉JS-SDK Demo</title>
+    <style>
+        html, body {
+            width: 100%;
+            overflow: hidde;
+            padding: 0;
+            margin: 0;
+        }
+
+        .body-state {
+            color: #FFFFFF;
+            background-color: #ED6A60;
+            height: 20px;
+        }
+
+        .body-title {
+            font-size: 18px;
+            color: #FFFFFF;
+            background-color: #ED6A60;
+            text-align: center;
+            height: 44px;
+            line-height: 44px;
+        }
+
+        .body-wrap {
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .sbtn {
+            margin: 0 auto;
+            margin-top: 40px;
+            width: 80%;
+            color: #FFFFFF;
+            background-color: #ED6A60;
+            text-align: center;
+            height: 40px;
+            line-height: 40px;
+            overflow: hidden;
+            border-radius: 5px;
+            font-size: 16px;
+            border: 0px;
+        }
+    .sbtn1 {
+        margin: 0 auto;
+        margin-bottom: 40px;
+        width: 80%;
+        color: #FFFFFF;
+        background-color: #ED6A60;
+        text-align: center;
+        height: 40px;
+        line-height: 40px;
+        overflow: hidden;
+        border-radius: 5px;
+        font-size: 16px;
+        border: 0px;
+    }
+    
+    #webView{
+        margin-bottom:30px;
+    }
+    #tishi{
+        margin-bottom:20px;
+    }
+
+    </style>
+</head>
+
+<body>
+
+<div class="body-wrap">
+    <button class="sbtn" id="login" onclick="window.location='login.html'">用户信息</button>
+    <button class="sbtn" id="device" onclick="window.location='device.html'">设备信息</button>
+    <button class="sbtn" id="pay" onclick="window.location='pay.html'">支付平台</button>
+    <button class="sbtn" id="share" onclick="window.location='share.html'">分享接口</button>
+    <button class="sbtn" id="storage" onclick="window.location='storage.html'">存储接口</button>
+    <button class="sbtn" id="communication" onclick="window.location='communication.html'">通讯接口</button>
+    <button class="sbtn" id="webView" onclick="window.location='showOrHiddenNav.html'">两种WebView</button>
+    <div id="tishi">-----------以下接口敬请期待-----------</div>
+    <button class="sbtn1" id="statistics">统计分析</button>
+    <button class="sbtn1" id="push">推送功能</button>
+    <button class="sbtn1" id="pagefunction">页面功能</button>
+</div>
+</body>
+</html>

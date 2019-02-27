@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>意见征集</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="{sysPath}/resources/solicitopinion/css/mui.min.css">
+		<style>
+			html,body {
+				background-color: #f2f2f2;
+				font-size:16px;
+			}
+			.mui-bar-nav~.mui-content{
+				padding: 0;
+			}
+			
+			.title{
+				margin: 20px 15px 7px;
+				color: #6d6d72;
+				font-size: 15px;
+			}
+			.mui-title{
+				font-size: 16px;
+			}
+			.mui-icon-left-nav:before{content:"\e471"; color: white; font-size: 20px;}
+			
+		
+			/*日期*/
+			p{
+			margin-top:10px;
+			height:25px;
+			color:#808080;
+			font-size: 12px;
+			}
+			
+			.mui-table-view-cell:after{width:100%;left:0px;right:0px;}
+			
+			.mui-icon-left-nav:before{
+			font-size:25px;
+			}
+			.mui-title {
+ 			font-size: 20px;
+			}
+			a:link { text-decoration:none;color: #808080;}
+	    　　 a:active { text-decoration:none}
+	    　　 a:hover { text-decoration:none}
+	    　　 a:visited { text-decoration:none}	
+		</style>
+	</head>
+	<body>
+	  <div class="mui-bar mui-bar-nav" style="background: #{barColor};">
+			<a class="mui-action-back mui-icon mui-pull-left" style="height: 44px; padding-top: 0px;margin-left:-25px;">
+				<img  src="{sysPath}/resources/solicitopinion/images/back.png" style="width:auto;max-height:44px;">
+			</a>
+			<h1 id="title" class="mui-title" style="color: white;">意见列表</h1>
+	  </div>
+	  <div class="mui-content" style="padding-top: 44px;height:100%;">
+	        <ul class="mui-table-view" style="margin-top: 0px;">
+				<!--body-->	
+	  		</ul>
+	  </div>
+	 
+	  
+	</body>
+	<script src="{sysPath}/resources/solicitopinion/js/mui.min.js"></script>
+	<script>
+		mui.init({
+			swipeBack:true //启用右滑关闭功能
+		});
+	</script>
+</html>

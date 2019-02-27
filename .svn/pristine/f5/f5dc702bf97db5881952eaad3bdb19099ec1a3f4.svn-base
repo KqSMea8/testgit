@@ -1,0 +1,143 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Pay</title>
+    <style>
+        html, body {
+        width: 100%;
+        overflow: hidden;
+        padding: 0;
+        margin: 0;
+        }
+
+        .body-state {
+        color: #FFFFFF;
+        background-color: #ED6A60;
+        height: 20px;
+        }
+
+        .body-title {
+        font-size: 16px;
+        color: #FFFFFF;
+        background-color: #ED6A60;
+        height: 44px;
+        line-height: 44px;
+        }
+
+        .body-wrap {
+        overflow: hidden;
+        padding-left: 5%;
+        padding-right: 5%;
+        }
+
+        .sbtn {
+        width: 80%;
+        color: #FFFFFF;
+        background-color: #ED6A60;
+        text-align: center;
+        height: 35px;
+        line-height: 37px;
+        overflow: hidden;
+        border-radius: 5px;
+        font-size: 16px;
+        border: 0px;
+        }
+
+        .backBtn {
+        padding-right: 0px;
+        width: 60px;
+        height: 44px;
+        background-image: url("../img/backButton.png");
+        background-size: 100%;
+        text-align: center;
+        border: 0px;
+        }
+
+        .title {
+        height: 40px;
+        width: 30%;
+        line-height: 40px;
+        vertical-align: top;
+        margin-left: 24%;
+        }
+
+        .body-wrap .btnInfo {
+        margin: 7px 0 7px 0;
+        font-size: 14px;
+        color: gray;
+        }
+        #pay{
+        width: 80%;
+        color: #FFFFFF;
+        background-color: #ED6A60;
+        text-align: center;
+        height: 35px;
+        line-height: 37px;
+        overflow: hidden;
+        border-radius: 5px;
+        font-size: 16px;
+        border: 0px;
+        margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="body-wrap">
+    <table border="0" align="center">
+        <tr>
+            <td colspan="2" align="center">   </td>
+        </tr>
+        <tr>
+            <td><p class="btnInfo" >商品名：</p></td>
+            <td><p  class="btnInfo" id="good_name">荔枝</p> </td>
+        </tr>
+        <tr>
+            <td> <p class="btnInfo">商品简介：</p></td>
+            <td> <p  class="btnInfo" id="good_subtext">好吃的荔枝</p> </td></td>
+        </tr>
+        <tr>
+            <td><p class="btnInfo">下单时间：</p></td>
+            <td><p  class="btnInfo" id="time">2015020226</p> </td>
+        </tr>
+        <tr>
+            <td><p class="btnInfo">订单号：</p></td>
+            <td><p  class="btnInfo" id="order_id">201502023223457654</p> </td>
+        </tr>
+        <tr>
+            <td><p class="btnInfo">单价：</p></td>
+            <td> <p  class="btnInfo" id="per_price">0.01</p></td>
+        </tr>
+        <tr>
+            <td><p class="btnInfo">数量：</p></td>
+            <td><p  class="btnInfo" id="num">1 </p></td>
+        </tr>
+        <tr>
+            <td> <p class="btnInfo">用户名：</p></td>
+            <td><p  class="btnInfo" id="user_id">就爱吃的人</p></td>
+        </tr>
+        <tr>
+            <td><p class="btnInfo">总价：</p></td>
+            <td> <p  class="btnInfo" id="all_price">0.01</p></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">   </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center"><button id="pay" onclick=onPay() >前往支付</button></td>
+        </tr>
+    </table>
+
+
+
+</div>
+</div>
+<script type="text/javascript" src="http://app.zjzwfw.gov.cn/client/jssdk/js/index.js"></script>
+<script data-main="http://app.zjzwfw.gov.cn/client/jssdk/jmportal_SDK.js" src="http://app.zjzwfw.gov.cn/client/jssdk/require.js"></script>
+<!--<script type="text/javascript" src="../js/index.js"></script>-->
+<!--<script data-main="../jmportal_SDK.js" src="../require.js"></script>-->
+
+</body>
+</html>

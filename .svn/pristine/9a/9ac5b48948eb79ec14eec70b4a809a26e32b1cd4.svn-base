@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>账号绑定</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="{sysUrl}/resources/mailbox/css/mui.min.css">
+		<link rel="stylesheet" href="{sysUrl}/resources/mailbox/js/need/layer.css">
+		<style>
+			html,body {
+				background-color: #f2f2f2;
+			}
+			.mui-bar-nav~.mui-content{
+				padding: 0;
+			}
+			
+			.title{
+				margin: 20px 15px 7px;
+				color: #6d6d72;
+				font-size: 15px;
+			}
+			.mui-input-group .mui-input-row:after {left: 0px;}
+			.mui-icon-left-nav:before{content:"\e471"; color: white;}
+			.mui-input-group .mui-button-row {height: auto;}
+			.mui-input-row label {width: 25%;   padding-right: 0px;}
+			.mui-input-row label~input{width: 75%;}
+			.mui-input-group input[type=text] {
+			    -webkit-box-shadow: 0 0 0px 1000px white inset;
+			}
+			input:-webkit-autofill {-webkit-box-shadow: 0 0 0px 1000px white inset;}
+			.mui-input-group:before { background-color: white;}
+		</style>
+	</head>
+	<body>
+	  <div class="mui-bar mui-bar-nav" style="height:44px; box-shadow:none; background: #{color};">
+			<a class="mui-icon mui-pull-left" href="backtoapp" style="padding: 0 0;">
+			  <img src="{sysUrl}/resources/mailbox/images/goback.png" style="max-height: 44px;">
+			</a>
+			<h1 id="title" class="mui-title" style="color: white;font-size: 20px;">账号绑定</h1>
+	  </div>
+	  <div class="mui-content" style="padding-top: 44px;height:auto;">
+	      <form class="mui-input-group">
+	                <input type="hidden" id="color" name="color" value="{color}"></input>
+	                <input type="hidden" id="sysid" name="sysid" value="{sysid}"></input>
+	                <input type="hidden" id="uuid" name="uuid" value="{uuid}"></input>
+	                <input type="hidden" id="appname" name="appname" value="{appname}"></input>
+	                <input type="hidden" id="filename" name="filename" value="index"></input>
+	                <input type="hidden" id="clienttype" name="clienttype" value="{clienttype}"></input>
+	                <div class="" style="height: 10px;">
+					</div>
+					<div class="mui-input-row">
+						<label style="font-weight: bold;">用户名:</label>
+						<input type="text" id="logid" name="logid" placeholder="输入用户名" value="">
+					</div>
+					<div class="mui-input-row">
+						<label style="font-weight: bold;">密　码:</label>
+						<input type="password" id="pwd" name="pwd" placeholder="输入密码" value="">
+					</div>
+					<div class="mui-button-row" style="padding: 20px 0;">
+			
+						<button type="button" id="danger" class="mui-btn mui-btn-danger mui-btn-block" style="width: 90%; margin-left:5%; margin-bottom:0;  background-color: #{color}; border: #EF4F4f; font-size: 20px;  padding: 10px 0; color: #ffffff;" onclick="return check(this.form)">确&nbsp;&nbsp;定</button>
+					</div>
+		  </form>
+	  </div>
+	 
+	  
+	</body>
+	<script src="{sysUrl}/resources/mailbox/js/mui.min.js"></script>
+	<script src="{sysUrl}/resources/mailbox/js/jquery-1.8.3.min.js"></script>
+	<script src="{sysUrl}/resources/mailbox/js/layer.m.js"></script>
+	<script>
+		mui.init({
+			swipeBack:true //启用右滑关闭功能
+		});
+
+		   var color = $("#color").val();
+		   var sysid = $("#sysid").val();
+		   var filename = $("#filename").val();
+		   var uuid = $("#uuid").val();
+		   var sysid = $("#sysid").val();
+		   var resourceid = $("#resourceid").val();
+		   var clienttype = $("#clienttype").val();
+
+		  function check(form) {
+
+	          if(form.logid.value=='') {
+		          　　　　layer.open({
+		        	    content: '请输入前台注册时填入的用户名',
+		        	    style: 'background-color:#545454; color:#fff; border:none;top:-100px;text-align: center;',
+		        	    time: 3
+		        	});
+	                form.logid.focus();
+	                return false;
+	           }
+		      if(form.pwd.value==''){
+		    	  layer.open({
+		        	    content: '请输入登录密码',
+		        	    style: 'background-color:#545454; color:#fff; border:none;top:-100px;text-align: center;',
+		        	    time: 3
+		        	});
+		            form.pwd.focus();
+		            return false;
+		       }
+               var logid = form.logid.value;
+               var pwd = form.pwd.value;
+               var jactUrl = '{jactUrl}';
+               var appname = $("#appname").val();;
+		  		$.ajax({
+		  			type : "GET",
+		  			url :'logging.do',
+		  			data :"pwd=" + pwd + "&logid=" + logid + "&jactUrl=" + jactUrl + "&appname=" + appname, 
+		  			success : function(msg) {
+			  			
+		  				if(msg == 'true'){ 
+		  				     window.location.href="{sysUrl}/interfaces/mailbox/index.do?uuid=" + uuid + "&color="+color+ "&sysid="+sysid + "&jactUrl=" + jactUrl + "&clienttype=" + clienttype+ "&appname=" + appname;
+			  			}else if(msg == 'connect error'){		  				 
+			  				 window.location.href="{sysUrl}/interfaces/mailbox/error.do?color=" + color + "&clienttype=" + clienttype;
+
+				  		}else if(msg == 'exist'){
+				  			layer.open({
+				        	    content: '该账号已经被绑定使用',
+				        	    style: 'background-color:#545454; color:#fff; border:none;top:-100px;text-align: center;',
+				        	    time: 3
+				        	});
+				  			$("#logid").val('');
+				  			$("#pwd").val('');
+			  				return false;
+					  	}else{
+				  			layer.open({
+				        	    content: '绑定失败，请检查登录名和密码',
+				        	    style: 'background-color:#545454; color:#fff; border:none;top:-100px;text-align: center;',
+				        	    time: 3
+				        	});
+				  			$("#pwd").val('');
+			  				return false;
+					  	}
+		  				
+		  			}
+		  		});
+	         }
+	</script>
+</html>

@@ -1,0 +1,131 @@
+<!doctype html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta charset="UTF-8">
+    <title>登录接口</title>
+    <style>
+        html, body {
+            width: 100%;
+            overflow: hidden;
+            padding: 0;
+            margin: 0;
+        }
+
+        .body-state {
+            color: #FFFFFF;
+            background-color: #ED6A60;
+            height: 20px;
+        }
+
+        .body-title {
+            font-size: 16px;
+            color: #FFFFFF;
+            background-color: #ED6A60;
+            height: 44px;
+            line-height: 44px;
+        }
+
+        .body-wrap {
+            overflow: hidden;
+            padding-left: 17%;
+        }
+
+        .sbtn {
+            width: 80%;
+            color: #FFFFFF;
+            background-color: #ED6A60;
+            text-align: center;
+            height: 35px;
+            line-height: 37px;
+            overflow: hidden;
+            border-radius: 5px;
+            font-size: 16px;
+            border: 0px;
+        }
+
+        .backBtn {
+            padding-right: 0px;
+            width: 60px;
+            height: 44px;
+            background-image: url("../img/backButton.png");
+            background-size: 100%;
+            text-align: center;
+            border: 0px;
+        }
+
+        .title {
+            height: 40px;
+            width: 30%;
+            line-height: 40px;
+            vertical-align: top;
+            margin-left: 24%;
+        }
+
+        .body-wrap .btnInfo {
+            margin: 30px 0 7px 0;
+            font-size: 14px;
+            color: gray;
+        }
+
+        .img {
+            padding-right: 0px;
+            margin-top: 10px;
+            text-align: center;
+            margin-left: 23%;
+        }
+    #sina{
+        margin-bottom:30px;
+    }
+    </style>
+</head>
+
+<body>
+
+<div class="body-wrap" id="cameraBody">
+    <div>
+        <p class="btnInfo">注册(以浙江为例)</p>
+        <button class="sbtn" onclick=onRegisterUser()>registerUser</button>
+    </div>
+    <div>
+    <div>
+        <p class="btnInfo">登录</p>
+            <button class="sbtn" onclick=onLoginApp()>loginApp</button>
+        </div>
+        <div>
+        <p class="btnInfo">获得用户信息</p>
+        <button class="sbtn" onclick=onGetUserInfo()>getUserInfo</button>
+    </div>
+    <div>
+        <p class="btnInfo">注销登录</p>
+        <button class="sbtn" onclick=onLogout()>loginOut</button>
+    </div>
+    <div>
+        <p class="btnInfo">修改密码(以浙江为例)</p>
+        <button class="sbtn" onclick=onModifyPassword()>modifyPassword</button>
+    </div>
+    <div>
+        <p class="btnInfo">登录到QQ接口</p>
+        <button class="sbtn" onclick=onLoginQQ()>loginQQ</button>
+    </div>
+    <div>
+        <p class="btnInfo">注销QQ登录接口</p>
+        <button class="sbtn" onclick=onLogoutQQ()>logoutQQ</button>
+    </div>
+    <div>
+        <p class="btnInfo">登录到新浪微博接口</p>
+        <button class="sbtn" onclick=onLoginSinaWeibo()>loginSinaWeibo</button>
+    </div>
+    <div>
+        <p class="btnInfo">注销新浪微博登录接口</p>
+        <button class="sbtn" id="sina" onclick=onLogoutSinaWeibo()>logoutSinaWeibo</button>
+    </div>
+</div>
+
+    <script type="text/javascript" src="http://app.zjzwfw.gov.cn/client/jssdk/js/index.js"></script>
+    <script data-main="http://app.zjzwfw.gov.cn/client/jssdk/jmportal_SDK.js" src="http://app.zjzwfw.gov.cn/client/jssdk/require.js"></script>
+<!--<script type="text/javascript" src="../js/index.js"></script>-->
+<!--<script data-main="../jmportal_SDK.js" src="../require.js"></script>-->
+
+</body>
+</html>

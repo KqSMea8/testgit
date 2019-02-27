@@ -1,0 +1,8 @@
+<li class="mui-table-view-cell" style="padding-bottom:0px;">  
+				
+						<span class="" style="line-height: 20px;height:37px; word-break:break-all; word-wrap:break-word; word-break:normal;">{content}</span>
+						
+ 					<p>
+						<span>姓名:&nbsp;&nbsp;{name}</span><span class="mui-pull-right " style="width:130px;text-align:left;height:14px">发表日期:&nbsp;&nbsp;{time}	</span>						
+				    </p>
+</li>

@@ -1,0 +1,24 @@
+
+@font-face {font-family: "iconfont";
+  src: url('iconfont.eot'); /* IE9*/
+  src: url('iconfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('iconfont.woff') format('woff'), /* chrome、firefox */
+  url('../fonts/iconfont.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+  url('iconfont.svg#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+.iconfont,.mui-checkbox input[type=checkbox]:before {
+  font-family:"iconfont" !important;
+  font-style:normal;
+  font-size:20px;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.mui-checkbox input[type=checkbox]:before ,.mui-checkbox input[type=checkbox]:checked:before { content: "\e606"; }
+
+
+.icon-huisekuang:before { content: "\e601"; }
+.icon-shangla:before { content: "\e7ea"; }
+.icon-xiala:before { content: "\e611"; }

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>意见征集</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="{sysPath}/resources/solicitopinion/css/mui.min.css">
+		<link rel="stylesheet" href="{sysPath}/resources/solicitopinion/js/need/layer.css">
+		<style>
+			html,body {
+				background-color: #f2f2f2;
+				font-size: 16px;
+			}
+			.mui-bar-nav~.mui-content{
+				padding: 0;
+			}
+			
+			.title{
+				margin: 20px 15px 7px;
+				color: #6d6d72;
+				font-size: 15px;
+			}
+			.mui-btn, button, input[type=button], input[type=reset], input[type=submit]{
+			border-top-left-radius: 5px;
+			border-top-right-radius: 5px;
+			border-bottom-left-radius: 5px;
+			border-bottom-left-radius: 5px;
+			}
+			.mui-icon-left-nav:before{content:"\e471"; color: white;}
+			.mui-radio input[type=radio]:before {content: "\e411";}
+			.mui-checkbox input[type=checkbox]:checked:before, .mui-radio input[type=radio]:checked:before {color: #cccccc;}
+			.mui-input-row {
+				padding:6px 15px;
+			}
+			.mui-icon-checkmarkempty:before { content: "\e472";color:white;font-size:40px;}
+			
+			.mui-icon-left-nav:before{
+			font-size:25px;
+			}
+			.mui-title {
+ 			font-size: 20px;
+			}
+			button.mui-btn.mui-btn-danger{
+			height:40px;
+			}
+		</style>
+	<script>
+		
+	</script>
+	</head>
+	<body>
+	  <div class="mui-bar mui-bar-nav" style="background: #{barColor};">
+			<a class="mui-action-back mui-icon mui-pull-left" style="height: 44px; padding-top: 0px;margin-left:-25px;">
+				<img  src="{sysPath}/resources/solicitopinion/images/back.png" style="width:auto;max-height:44px;">
+			</a>
+			<h1 id="title" class="mui-title" style="color: white;">提交意见</h1>
+	  </div>
+	  <div class="mui-content" style="padding-top: 44px;height:100px;">
+	  	<input type="hidden" value="{topicid}" name="topicid" id="topicid">
+		<input type="hidden" value="{clienttype}" name="clienttype" id="clienttype">
+		<input type="hidden" value="{resourceid}" name="resourceid" id="resourceid">
+	      <form id="iphonesubb" class="mui-input-group" style="height:auto;">
+					<div class="mui-input-row" style="height:50px;padding-left: 0px;">
+						<label style="padding-top:11px">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</label>
+						<input name="ideapublisher" id="ideapublisher" type="text"  placeholder="输入姓名">
+					</div>
+					<div class="mui-input-row" style="height:50px;padding-left: 0px;">
+						<label style="padding-top:11px">联系电话</label>
+						<input name="ideaphone" id="ideaphone" type="text" placeholder="输入电话">
+					</div>
+					<div class="mui-input-row" style="height:50px;padding-left: 0px;">
+						<label style="padding-top:11px">电子邮箱</label>
+						<input  name="ideaemail" id="ideaemail" type="text" placeholder="输入邮箱">
+					</div>
+		  </form>
+		  <div class="mui-input-row" style="margin: 5px 0px;height:140px;">
+					    <textarea name="ideatext" id="ideatext" rows="5" placeholder="在此输入意见内容"></textarea>
+		 			 </div>
+		 			 
+		 	<div class="mui-button-row" >
+						 <button type="button" class="mui-btn mui-btn-danger"  style="width: 80%;background: #{barColor};" onclick="subb()">提交意见</button>
+			</div>
+		 			
+	 	 </div>
+	 	
+	  
+	</body>
+	<script src="{sysPath}/resources/solicitopinion/js/mui.min.js"></script>
+	<script src="{sysPath}/resources/solicitopinion/js/jquery-1.8.3.min.js"></script>
+	<script src="{sysPath}/resources/solicitopinion/js/layer.m.js"></script>
+	<script>
+		mui.init({
+			swipeBack:true //启用右滑关闭功能
+		});
+		
+		
+		$(function(){
+			$("#ideapublisher").blur(function(){
+				var ideapublisher = $('#ideapublisher').val();
+				if(ideapublisher==''){
+					return false;
+				}
+				if(!CheckYou(ideapublisher.trim())){
+					layer.open({
+		        	    content: '请输入正确的姓名',
+		        	    style: 'background-color:#545454; color:#fff; border:none;top:-100px;text-align:center;',
+		        	    time: 2
+		        });
+					return false;
+				}
+				if(ideapublisher.trim().length>8){
+					layer.open({
+		        	    content: '姓名不能超过8个字符',
+		        	    style: 'background-color:#545454; color:#fff; border:none;top:-100px;text-align:center;',
+		        	    time: 2
+		        });
+					return false;
+				}
+			});
+			
+			$("#ideaphone").blur(function(){
+				var ideaphone = $('#ideaphone').val();
+				
+				if(ideaphone==''){
+					return false;
+				}
+			
+				if(!isMobile(ideaphone)){
+					layer.open({
+		        	    content: '请输入正确的移动电话',
+		        	    style: 'background-color:#545454; color:#fff; border:none;top:-100px;text-align:center;',
+		        	    time: 2
+		        });
+					return false;
+				}
+			});
+			
+			$("#ideaemail").blur(function(){
+				var ideaemail = $('#ideaemail').val();
+				if(ideaphone==''){
+					return false;
+				}
+				
+				if(!checkEmail(ideaemail)){
+					layer.open({
+		        	    content: '请输入合法的EMAIL地址',
+		        	    style: 'background-color:#545454; color:#fff; border:none;top:-100px;text-align:center;',
+		        	    time: 2
+		        });
+					return false;
+				}
+			
+			});
+			
+			
+		});
+		
+		
+		
+		function subb(){
+			var topicid = $('#topicid').val();
+		
+			var clienttype = $('#clienttype').val();
+			var resourceid = $('#resourceid').val();
+			var ideapublisher = $('#ideapublisher').val();
+			var ideaphone = $('#ideaphone').val();
+			var ideaemail = $('#ideaemail').val();
+			var ideatext = $('#ideatext').val();
+			if(ideapublisher.trim()==""){
+				layer.open({
+	        	    content: '姓名不能为空',
+	        	    style: 'background-color:#545454; color:#fff; border:none;top:-100px;text-align:center;',
+	        	    time: 2
+	        });
+
+				return false;
+			}else if(ideapublisher.length>8){
+				layer.open({
+	        	    content: '姓名不能超过8个字符',
+	        	    style: 'background-color:#545454; color:#fff; border:none;top:-100px;text-align:center;',
+	        	    time: 2
+	        });
+				return false;
+			}else if(!CheckYou(ideapublisher.trim())){
+				layer.open({
+	        	    content: '请输入正确的姓名',
+	        	    style: 'background-color:#545454; color:#fff; border:none;top:-100px;text-align:center;',
+	        	    time: 2
+	        });
+				return false;
+			}
+			if(ideaphone.trim()==""){
+				layer.open({
+	        	    content: '联系电话不能为空',
+	        	    style: 'background-color:#545454; color:#fff; border:none;top:-100px;text-align:center;',
+	        	    time: 2
+	        });
+				return false;
+			}
+			if(!isMobile(ideaphone)){
+				layer.open({
+	        	    content: '请输入正确的移动电话',
+	        	    style: 'background-color:#545454; color:#fff; border:none;top:-100px;text-align:center;',
+	        	    time: 2
+	        });
+				return false;
+			}
+			if(!checkEmail(ideaemail)){
+				layer.open({
+	        	    content: '请输入合法的EMAIL地址',
+	        	    style: 'background-color:#545454; color:#fff; border:none;top:-100px;text-align:center;',
+	        	    time: 2
+	        });
+				return false;
+			}
+			if(ideaemail.trim()==""){
+				layer.open({
+	        	    content: '电子邮件不能为空',
+	        	    style: 'background-color:#545454; color:#fff; border:none;top:-100px;text-align:center;',
+	        	    time: 2
+	        });
+				return false;
+			}
+			if(ideatext.trim()==""){
+				layer.open({
+	        	    content: '意见内容不能为空',
+	        	    style: 'background-color:#545454; color:#fff; border:none;top:-100px;text-align:center;',
+	        	    time: 2
+	        });
+				return false;
+			}
+			
+			if(ideatext.trim().length>200){
+				layer.open({
+	        	    content: '意见内容不能超过200字',
+	        	    style: 'background-color:#545454; color:#fff; border:none;top:-100px;text-align:center;',
+	        	    time: 2
+	        });
+				return false;
+			}
+			
+			
+			$.ajax({
+				type : "GET",
+				url :'{sysPath}/interfaces/suggestionsubmit.do',
+				data :{"ideapublisher":ideapublisher,"ideaphone":ideaphone,"ideaemail":ideaemail,"ideatext":ideatext,"topicid":topicid,"resourceid":resourceid},
+				success : function(msg) {
+					var result = msg;
+					if(result=='fail'){
+						layer.open({
+			        	    content: '提交失败！',
+			        	    style: 'background-color:#545454; color:#fff; border:none;top:-100px;text-align:center;',
+			        	    time: 2
+			        });
+						return;
+					}else if(result=='success'){
+						layer.open({
+			        	    content: '提交成功!',
+			        	    style: 'background-color:#545454; color:#fff; border:none;top:-100px;text-align:center;',
+			        	    time: 2
+			        });
+						setTimeout(function() {
+						mui.back();
+						return;
+						},1000);
+					}
+				
+				}
+			});
+		}
+		
+		
+		function checkEmail(theField) {
+			  var pattern = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
+			 if(theField == "") return true;
+			 if (!pattern.test(theField)) {
+			  return false;
+			 }
+			 return true;
+			}
+		function isMobile(value){
+			if(value.length != 11)
+			   {  
+			    //验证手机号为11位
+			    return false;
+			   }
+			   var reg0=/^13\d{5,9}$/; //130--139。至少7位
+			   var reg1=/^15\d{5,9}$/; //15至少7位
+			   var reg2=/^18\d{5,9}$/; //18
+			  
+			   var my=false;
+			   if (reg0.test(value))my=true;
+			   if (reg1.test(value))my=true;
+			   if (reg2.test(value))my=true;
+			   return my;
+		 }
+		function CheckYou(cs){  
+
+		    var regu = "^[a-zA-Z\u4e00-\u9fa5]+$";
+
+		    var re = new RegExp(regu);
+
+		    if (cs.search(re) != -1) {
+		    	return true;
+		    } else {
+		    	return false;
+		    }
+
+		}
+	</script>
+</html>

@@ -1,0 +1,4 @@
+<div class="mui-input-row {class}" style="height:100%;">
+			<label>{title}</label>
+			<input name="{name}{type}" type="{type}" id="{id}" value="{value}"/>
+</div>

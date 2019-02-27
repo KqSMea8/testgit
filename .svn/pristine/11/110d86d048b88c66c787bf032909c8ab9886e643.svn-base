@@ -1,0 +1,5 @@
+<li class="mui-table-view-cell">  
+	<a class="mui-navigate-right" style="" onclick="goContent({groupid})">
+		<div class="mui-media-body" style="font-size:18px;color:#333333;">{group}</div>
+	</a>
+</li>

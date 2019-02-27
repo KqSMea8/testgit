@@ -1,0 +1,7 @@
+.images {
+    margin-top: 5%;
+    margin-left: 10%;
+    width: 60%;
+    height: 60%;
+
+}

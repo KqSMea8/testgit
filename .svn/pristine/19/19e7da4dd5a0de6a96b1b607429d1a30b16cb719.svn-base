@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>网上调查</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="{sysPath}/resources/onlinesurvey/css/mui.min.css">
+		<style>
+			html,body {
+				background-color: #f2f2f2;
+				font-size: 16px;
+			}
+			.mui-bar-nav~.mui-content{
+				padding: 0;
+			}
+			
+			.title{
+				margin: 20px 15px 7px;
+				color: #6d6d72;
+				font-size: 15px;
+			}
+			.mui-icon-left-nav:before{content:"\e471"; color: white;}
+			.mui-input-row{
+				padding:5px 15px;
+				min-height:50px;
+			}
+			.mui-title{
+			font-size:16px;
+			}
+		
+			/*题目选项 */
+			.mui-input-row label{
+			width:100%;
+			line-height:20px;
+			font-size:16px;
+			padding:0px 15px;
+			}
+			
+			/*题目类型 */
+			.questype{
+			background-color:#{barColor};
+			width:50px;height:20px;
+			color:white;text-align:center;
+			font-size:12px;margin-top:10px;
+			margin-bottom:10px;
+			}
+			.labeldiv{
+			min-height:30px;
+			height:100%;
+			padding-left:0;
+			}
+			.resultdiv{
+			min-height:30px;
+			height:100%;
+			width:90%;
+			}
+			.colordiv{
+			float:left;
+			width:50%;
+			height:20px;
+			margin-left:30px; 
+			background-color:#FF6666;
+			}
+			
+			 .mui-icon-left-nav:before{
+			 font-size:25px;
+			 }
+			 .mui-title {
+ 			 font-size: 20px;
+			 }
+			  /*设置因滚动条而出现的div高度为0*/
+			 .mui-pull-bottom-pocket{
+			 height:0px;
+		 	 }
+		</style>
+	</head>
+	<body>
+	   <div class="mui-bar mui-bar-nav" style="width:750px; height:64px;padding-top:10px; background: white;">
+	        <a class="mui-action-back mui-icon mui-pull-left" style="height: 44px; padding-top: 0px;">
+			   <img  src="{sysPath}/resources/onlinesurvey/images/ipadback.png" style="max-width: 50%;">
+			</a>
+			<a class="mui-icon mui-pull-right" style="height: 44px;">
+			   <div style="background-color: #E6544C;width: 5px; height: 22px;"></div>
+			</a>
+			<h1 id="title" class="mui-title " style="color: black; font-size: 20px;right: 25px;text-align: right;">网上调查</h1>
+	  </div> 
+	  <div id="pullrefresh" class="mui-content  mui-scroll-wrapper" style="padding-top: 64px;height:100%;padding-bottom:10px;">
+	  	<div id="scroll" class="mui-scroll">
+	    <!--body-->
+	    </div>
+	  </div>
+	  
+	</body>
+	<script src="{sysPath}/resources/onlinesurvey/js/mui.min.js"></script>
+	<script>
+	mui.init({
+		
+		pullRefresh: {
+			container: '#pullrefresh',
+			up: {
+				contentnomore:'',
+				callback: pullupRefresh
+			}
+		}
+	});
+	
+
+	function pullupRefresh(){
+		mui('#pullrefresh').pullRefresh().endPullupToRefresh((true)); 
+		return;
+	}
+	</script>
+</html>

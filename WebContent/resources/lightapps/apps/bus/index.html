@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>公交查询</title>
+		<script src="./source/js/mui.min.js"></script>
+		<link href="./source/css/mui.min.css" rel="stylesheet" />
+		<link href="./source/css/busNearByQuery.css" rel="stylesheet" />
+		<link href="./source/css/app.css" rel="stylesheet" />
+		<!--引用百度地图的js-->
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=xOWZlWcTZPK84VcK3Ixzqq9wQ6arTUry"></script>
+		<script type="text/javascript" charset="UTF-8">
+			mui.init();
+		</script>
+	</head>
+	<body style="background-color: none;">
+		<div style="display: none;" id="header">
+			<header class="mui-bar mui-bar-nav" style="background-color: #007AFF;height:44px;font-family: '微软雅黑';">
+				<h1 class="mui-title" style="color: #FFFFFF;">智能公交</h1>
+			</header>
+		</div>
+		<div id="allmap"></div>
+		<div id="paddingtop" class="mui-content" >
+			<div id="slider" class="mui-slider" >
+				<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted mui-segmented-control-negative" style="padding-top: 44px;color: #333333;background-color: #ffffff;">
+					<a class="mui-control-item indicatorstyle mui-active" href="#item1mobile">
+						附近
+					</a>
+					<a class="mui-control-item indicatorstyle" href="#item2mobile">
+						站点
+					</a>
+					<a class="mui-control-item indicatorstyle" href="#item3mobile">
+						线路
+					</a>
+					<a class="mui-control-item indicatorstyle" href="#item4mobile">
+						换乘
+					</a>
+				</div>
+				<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-3"></div>
+				<div id="neardiv" class="mui-slider-group" style="height: 700px;">
+					<!--附近-->
+					<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+						<div id="scroll1" class="mui-scroll-wrapper" style="background-color: #FFFFFF;min-height: 616px;overflow: initial;">
+							<div class="mui-scroll">
+								<ul class="mui-table-view" id="parent" style="display: none;">
+									<!--模版 列表循环部分 start-->
+									<li v-for="item in items">
+										<table cellspacing="0" class="querycell">
+											<!--<tr class="header">
+													<button onclick="window.location.href='busStationDetail.html?stationName={{item.station}}&passlines={{item.passlines}}';return false">
+													</button>
+													<td style="font-size: 16px; color: #333333;">{{item.station}}</td>
+													<td class="distance" style="font-size: 12px; color: #A7A7AC;">{{item.distance}}米</td>
+											</tr>
+												<tr class="content" onclick="window.location.href='busStationDetail.html?stationName={{item.station}}&passlines={{item.passlines}}';return false">
+													<td style="font-size: 12px; color: #808080;" colspan="2">{{item.passlines}}</td>
+												</tr>-->
+											<tr class="header" style="border: 1px;">
+												<button style="color:black;background:none;font-size: 16px; color: #333333;width: 50%;border: 0px;float: left;text-align: left;" onclick="window.location.href='busStationDetail.html?stationName={{item.station}}&passlines={{item.passlines}}';return false">
+													<img src="./source/images/bus_location.png" style="width:15px;height:15px;margin-right: 5px;padding-top: 2px;">{{item.station}}</button>
+												<button style="color:black;background:none;width: 50%;border: 0px;float: right;text-align: right;" onclick="window.location.href='busStationDetail.html?stationName={{item.station}}&passlines={{item.passlines}}';return false">
+													附近   {{item.distance}}米</button>
+											</tr>
+											<tr class="content">
+												<button style="background:none;width: 100%;text-align: left;border: 0px;padding-right: 5px;color: #999999;size: 14px;overflow:hidden;text-overflow:ellipsis;" onclick="window.location.href='busStationDetail.html?stationName={{item.station}}&passlines={{item.passlines}}';return false">
+													{{item.passlines}}</button>
+											</tr>
+											<tr class="opt">
+												<td class="btn mapBtn" style="background: url(./source/images/bus_map.png) no-repeat center;background-position-x: 30%;background-size:24px;height: 40px;">
+													<button onclick="GoToMap('地图');return false" style="text-align:left;color:black;width:40px;border: none;background: transparent;">地图</button>
+												</td>
+												<td class="btn streetBtn" style="background: url(./source/images/bus_street.png) no-repeat center;background-position-x: 30%;background-size:24px;height: 40px;">
+													<button onclick="GoToMap('街景');return false" style="text-align:left;color:black;width:40px;border: none;background: transparent;">街景</button>
+												</td>
+											</tr>
+										</table>
+									</li>
+									<!--模版 列表循环部分 end-->
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!--站点-->
+					<div id="item2mobile" class="mui-slider-item mui-control-content" style="background-color: #f2f2f2;">
+						<div id="scroll2" class="mui-scroll-wrapper" style="background-color: #f2f2f2;min-height: 100%;">
+							<div class="mui-input-row stationQueryRow">
+								<input type="search" id="stationTF" class="mui-input" placeholder="输入站点名" style="height: 35px;font-size: 14px;background: white;">
+							</div>
+							<button id="stationQueryBtn" type="button" class="queryBtn" onclick="StationQueryBtnClicked()">查询</button>
+							<ul class="mui-table-view" id="parent3" style="display: none; background-color: #FFFFFF;margin-top: 20px;">
+								<!--模版 列表循环部分 start-->
+								<li style="background-color: #f2f2f2;border-bottom-color: transparent;padding-left: 20px;padding-bottom: 10px;">
+									<div style="font-size: 14px;height: 20px;line-height: 20px;">搜索历史</div>
+								</li>
+								<li class="mui-table-view-cell" v-for="item in items3" style="margin-left:6px;width: 90%;border-bottom-width: 1px solid #f2f2f2;" onclick="window.location.href='busStationDetail.html?stationName={{item.history}}&passlines={{item.passlines}}';return false">
+									<img class="mui-pull-left" id="leftImage" src="./source/images/search.png">
+									<div id="historyLi" class="muihistory">{{item.history}}</div>
+									<div style="display: none;">{{item.passlines}}</div>
+								</li>
+								<!--模版 列表循环部分 end-->
+								<li class="mui-table-view-cell" style="font-size: 12px;text-align: center;color: #999999;" onclick="clearHistory('historyStation')">清空历史记录</li>
+							</ul>
+						</div>
+					</div>
+					<!--线路-->
+					<div id="item3mobile" class="mui-slider-item mui-control-content" style="background-color: #f2f2f2;">
+						<div id="scroll3" class="mui-scroll-wrapper">
+							<div class="mui-input-row stationQueryRow">
+								<input id="lineTF" type="search" class="mui-input" placeholder="输入线路名" style="height: 35px;font-size: 14px;background: white;">
+							</div>
+							<button id="stationQueryBtn" type="button" class="queryBtn" onclick="LineQueryBtnClicked()">查询</button>
+							<ul class="mui-table-view" id="parent2" style="display: none; background-color: #FFFFFF;margin-top: 20px;">
+								<!--模版 列表循环部分 start-->
+								<li style="background-color: #f2f2f2;border-bottom-color: transparent;padding-left: 20px;padding-bottom: 10px;">
+									<div style="font-size: 14px;height: 20px;line-height: 20px;">搜索历史</div>
+								</li>
+								<li class="mui-table-view-cell" v-for="item in items2" style="margin-left:6px;width: 90%;border-bottom-width: 1px solid #f2f2f2;" onclick="lineHistoryClicked('{{item.history}}');return false">
+									<img class="mui-pull-left" id="leftImage" src="./source/images/search.png">
+									<div id="historyLi" class="muihistory">{{item.history}}</div>
+								</li>
+								<!--模版 列表循环部分 end-->
+								<li class="mui-table-view-cell" style="font-size: 12px;text-align: center;color:#999999;" onclick="clearHistory('historyLine')">清空历史记录</li>
+							</ul>
+						</div>
+					</div>
+					<!--换乘-->
+					<div id="item4mobile" class="mui-slider-item mui-control-content" style="background-color: #f2f2f2;">
+						<div id="scroll4" class="">
+							<table style="background-color: #ffffff;">
+								<tr>
+									<td class="startTd"><img src="./source/images/bus_start.png" class="transferimg" id="startImg" /></td>
+									<td>
+										<input id="startTF" type="text" class="mui-input-clear start" placeholder="请输入起点" style="border:none;vertical-align: middle;margin-top: 15px;" oninput="BusChangeTFChanged('startTF')" />
+									</td>
+									<td style="padding-left:20px;padding-right: 30px;" rowspan="2" onclick="changeStartAndEnd()"><img src="./source/images/bus_change.png" width="5" id="change" class="changeImage" /></td>
+								</tr>
+								<tr>
+									<td class="endTd"><img src="./source/images/bus_end.png" class="transferimg" id="endImg" /></td>
+									<td style="border-top:1px solid #f2f2f2;">
+										<input id="endTF" type="text" class="mui-input-clear" placeholder="请输入终点" class="end" style="border:none;margin-top: 15px;" oninput="BusChangeTFChanged('endTF')" />
+									</td>
+								</tr>
+								<tr style="border-bottom: 1px solid #f2f2f2;border-top: 1px solid #f2f2f2;">
+									<td colspan="3" class="btns" id="trans">
+										<span style="margin-left: 5%;margin-top: 10px;margin-bottom: 10px;"><img src="./source/images/bus_car.png" style="width:24px;height:24px;" id="carChangeBtn" onclick="GoToMap('驾车');return false"/></span>
+										<span><img src="./source/images/bus_bus.png" style="width:24px;height:24px;" id="busChangeBtn" onclick="BusChangeQueryBtnClicked()"/></span>
+										<span><img src="./source/images/bus_walk.png" style="width:24px;height:24px;" id="walkChangeBtn"  onclick="GoToMap('步行');return false"/></span>
+									</td>
+								</tr>
+							</table>
+							<ul class="mui-table-view " id="parent4" style="display: none; background-color: #FFFFFF;">
+								<!--模版 列表循环部分 start-->
+								<li class="mui-table-view-cell" v-for="item in items4" style="margin-left:5%;width: 90%;border-bottom-width: 1px solid #f2f2f2;" onclick="KeywordClicked('{{item.title}}');return false">
+									<img class="mui-pull-left" id="leftImage" src="./source/images/search.png">
+									<div>{{item.title}}</div>
+								</li>
+								<!--模版 列表循环部分 end-->
+							</ul>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+		</div>
+		<script src="./source/js/util.js"></script>
+		<script src="./service/busNearByQuery.service.js"></script>
+		<script src="./controller/busNearByQuery.controller.js"></script>
+		<script src="./../weather/source/js/jquery-1.8.3.min.js"></script>
+		<script src="./source/js/jquery-2.2.3.min.js"></script>
+		<script>
+			var main = null;
+			mui.init({
+				swipeBack: false,
+				statusBarBackground: '#f7f7f7',
+				gestureConfig: {
+					doubletap: true
+				},
+				pullRefresh: {
+					container: "#scroll1", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+					down: {
+						contentdown: "下拉刷新", //可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
+						contentover: "释放立即刷新", //可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
+						contentrefresh: "正在刷新...", //可选，正在刷新状态时，下拉刷新控件上显示的标题内容
+						callback: pullToRefresh //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+					},
+					up: {
+						contentrefresh: "正在加载...", //可选，正在加载状态时，上拉加载控件上显示的标题内容
+						contentnomore: '没有更多数据了', //可选，请求完毕若没有更多数据时显示的提醒内容；
+						callback: dragToGetMore //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+					}
+				}
+			});
+			mui.plusReady(function() {
+				//仅支持竖屏显示
+				plus.screen.lockOrientation("portrait-primary");
+				main = plus.webview.currentWebview();
+			});
+			//敲击顶部导航，内容区回到顶部
+			document.querySelector('header').addEventListener('doubletap', function() {
+				main.children()[0].evalJS('mui.scrollTo(0, 100)');
+			});
+			(function($) {
+				$('.mui-scroll-wrapper').scroll({
+					indicators: true //是否显示滚动条
+				});
+			})(mui);
+		</script>
+
+		<script src="./source/js/vue.min.js"></script>
+		<script src="./entity/busNearByQueryEntity.js"></script>
+	</body>
+
+</html>

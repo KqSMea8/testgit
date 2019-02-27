@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>公交查询</title>
+		<script src="./source/js/mui.min.js"></script>
+		<link href="./source/css/mui.min.css" rel="stylesheet" />
+		<!--引用百度地图的js-->
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=xOWZlWcTZPK84VcK3Ixzqq9wQ6arTUry"></script>
+		<script type="text/javascript" charset="UTF-8">
+			mui.init();
+		</script>
+		<style>
+			.indicatorstyle {
+				font-size: 16px;
+				font-family: 微软雅黑;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div style="display: none;" id="header">
+			<header class="mui-bar mui-bar-nav" style="background-color: #007AFF;height:44px;font-family: '微软雅黑';">
+				<a class="mui-action-back mui-icon mui-pull-left" style="color: #FFFFFF;background-image: url(./source/images/topback.png);background-size: 20px 20px;background-repeat: no-repeat;margin-top: 10px;margin-left: 10px"></a>
+				<h1 class="mui-title" id="titleName" style="color: #FFFFFF;"> </h1>
+				<img src="./source/images/bus_map_top.png" style="width:25px;height:25px;float: right;margin-top: 8px;" onclick="GoToMap();return false" />
+			</header>
+		</div>
+		<script>
+			var href = location.href;
+			//依据href获得传来的参数截取传来的站点名称
+			var lineName = href.split("lineName=")[1];
+			lineName = decodeURI(lineName);
+			document.getElementById("titleName").innerHTML = lineName;
+		</script>
+
+		<div class="mui-content">
+			<div id="slider" class="mui-slider">
+				<div id="topinde" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted mui-segmented-control-negative" style="color: #999999;padding-top: 44px;">
+					<a class="mui-control-item indicatorstyle mui-active " href="#item1mobile">上行</a>
+					<a class="mui-control-item indicatorstyle" href="#item2mobile">下行</a>
+				</div>
+				<div class="mui-slider-progress-bar mui-col-xs-6"></div>
+				<div class="mui-slider-group">
+					<div id="item1mobile" class="mui-slider-item mui-control-content  mui-active" style="min-height:500px;background-color: #FFFFFF;">
+						<div id="scroll1" class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<ul class="mui-table-view" id="parent" style="display: none;background-color: #FFFFFF;">
+									<li class="mui-table-view-cell" id="time" style="height: 40px;font-size: 12px;color: #999999;text-align: center;">
+									</li>
+									<!--列表循环部分-->
+									<li class="mui-table-view-cell" v-for="item in items" style="height: 40px;font-size: 14px;color: #333333;">{{item.station}}</li>
+									<!--列表循环部分-->
+								</ul>
+							</div>
+						</div>
+					</div>
+
+					<div id="item2mobile" class="mui-slider-item mui-control-content" style="min-height:500px;background-color: #FFFFFF;">
+						<div id="scroll2" class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<ul class="mui-table-view" id="parent2" style="display: none;background-color: #FFFFFF;">
+									<li class="mui-table-view-cell" id="time2" style="height: 40px;font-size: 12px;color: #999999;text-align: center;">
+									</li>
+									<!--列表循环部分-->
+									<li class="mui-table-view-cell" v-for="item2 in itemsx" style="height: 40px;font-size: 16px;color: #333333;">{{item2.station}}</li>
+									<!--列表循环部分-->
+								</ul>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<script>
+			var main = null;
+			mui.init({
+				swipeBack: false,
+				statusBarBackground: '#f7f7f7',
+				gestureConfig: {
+					doubletap: true
+				}
+			});
+			mui.plusReady(function() {
+				//仅支持竖屏显示
+				plus.screen.lockOrientation("portrait-primary");
+				main = plus.webview.currentWebview();
+			});
+			//敲击顶部导航，内容区回到顶部
+			document.querySelector('header').addEventListener('doubletap', function() {
+				main.children()[0].evalJS('mui.scrollTo(0, 100)');
+			});
+			(function($) {
+				$('.mui-scroll-wrapper').scroll({
+					indicators: true //是否显示滚动条
+				});
+			})(mui);
+		</script>
+
+		<script>
+			var sliderIndex = 0;
+			document.querySelector('.mui-slider').addEventListener('slide', function(event) {
+				sliderIndex = event.detail.slideNumber;
+			});
+		</script>
+		<script src="./source/js/util.js"></script>
+		<script src="./source/js/vue.min.js"></script>
+		<script src="./service/busLineDetail.service.js"></script>
+		<script src="./controller/busLineDetail.controller.js"></script>
+	</body>
+
+</html>
